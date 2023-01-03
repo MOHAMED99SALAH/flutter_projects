@@ -29,9 +29,9 @@ class _LastOrderState extends State<LastOrder> {
                 height: 60,
               ),
               FutureBuilder(
-                  future: products_repository(data_api()).getLastOrder(),
+                  future: Products_repository(Data_api()).getLastOrder(),
                   builder: (context, snapshot) {
-                    List<soldProduct> products = snapshot.data;
+                    List<SoldProduct> products = snapshot.data;
 
                     return SizedBox(
                       height: 150,

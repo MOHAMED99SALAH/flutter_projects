@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:delicyfood/presentation/screens/all_pages/vegetablePage.dart';
 
 class Shape extends StatelessWidget {
-  product productt;
+  Product productt;
 
   final CartBloc bloc = BlocProvider.getBloc<CartBloc>();
-  addtocart(product fooditem) {
+  addtocart(Product fooditem) {
     bloc.addtolist(fooditem);
   }
 
@@ -23,7 +23,7 @@ class Shape extends StatelessWidget {
       onTap: () {
         addtocart(productt);
 
-        vege_catg.buy = true;
+      Vegetables.buy = true;
 
         SnackBar snackBar = SnackBar(
           content: Text("${productt.name} added successfully"),

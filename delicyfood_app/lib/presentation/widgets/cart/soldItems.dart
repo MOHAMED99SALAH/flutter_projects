@@ -7,7 +7,7 @@ import 'package:delicyfood/presentation/screens/all_pages/vegetablePage.dart';
 
 
 class Listproducts_sold extends StatefulWidget {
-  static List<product> itmes_sold;
+  static List<Product> itmes_sold;
 
   Listproducts_sold(itmes) {
     itmes_sold = itmes;
@@ -37,9 +37,9 @@ class _Listproducts_soldState extends State<Listproducts_sold> {
                   Listproducts_sold.itmes_sold.removeAt(index);
                   setState(() {
                     if (Listproducts_sold.itmes_sold.length == 0) {
-                      vege_catg.buy = false;
+                      Vegetables.buy = false;
                     } else {
-                      vege_catg.buy = true;
+                      Vegetables.buy = true;
                     }
                   });
                 });

@@ -4,14 +4,14 @@ import 'package:delicyfood/presentation/screens/admin/updateProduct.dart';
 import 'package:delicyfood/presentation/screens/admin/updatedchoosenProduct.dart';
 import 'package:flutter/material.dart';
 
-class adminPage extends StatefulWidget {
-  const adminPage({Key key}) : super(key: key);
+class AdminPage extends StatefulWidget {
+  const AdminPage({Key key}) : super(key: key);
 
   @override
-  State<adminPage> createState() => _adminPageState();
+  State<AdminPage> createState() => _AdminPageState();
 }
 
-class _adminPageState extends State<adminPage> {
+class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +48,7 @@ class _adminPageState extends State<adminPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return addProduct();
+                      return AddProduct();
                     },
                   ),
                 );
@@ -74,7 +74,7 @@ class _adminPageState extends State<adminPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return chooseUpdateProduct();
+                      return ChooseUpdateProduct();
                     },
                   ),
                 );
@@ -100,7 +100,7 @@ class _adminPageState extends State<adminPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return deleteProduct();
+                      return DeleteProduct();
                     },
                   ),
                 );

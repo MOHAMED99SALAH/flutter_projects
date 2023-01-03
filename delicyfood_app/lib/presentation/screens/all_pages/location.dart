@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class GlobalSreen extends StatefulWidget {
+class MapScreen extends StatefulWidget {
   static bool status = false;
   static LatLng Mylocation = null;
 
@@ -11,7 +11,7 @@ class GlobalSreen extends StatefulWidget {
   _MapSreenState createState() => _MapSreenState();
 }
 
-class _MapSreenState extends State<GlobalSreen> {
+class _MapSreenState extends State<MapScreen> {
   static const _initalcameraposition =
       CameraPosition(target: LatLng(30.033333, 31.233334), zoom: 11.0);
 
@@ -30,7 +30,7 @@ class _MapSreenState extends State<GlobalSreen> {
 
   void _addmarker(LatLng pos) async {
     if (_Origin == null) {
-      GlobalSreen.status = true;
+      MapScreen.status = true;
       setState(() {
         _Origin = Marker(
           markerId: const MarkerId("Origin"),
@@ -40,18 +40,18 @@ class _MapSreenState extends State<GlobalSreen> {
           position: pos,
         );
       });
-      GlobalSreen.Mylocation = pos;
+      MapScreen.Mylocation = pos;
     } else {
       setState(() {
-        GlobalSreen.status = true;
+        MapScreen.status = true;
         _Origin = Marker(
           markerId: const MarkerId("Origin"),
           infoWindow: const InfoWindow(title: "Location"),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
           position: pos,
         );
       });
-      GlobalSreen.Mylocation = pos;
+      MapScreen.Mylocation = pos;
     }
   }
 
@@ -126,7 +126,7 @@ class _MapSreenState extends State<GlobalSreen> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

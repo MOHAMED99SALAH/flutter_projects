@@ -3,7 +3,7 @@ import 'package:delicyfood/data/models/soldProduct.dart';
 import 'package:flutter/material.dart';
 
 class LastOrderShape extends StatelessWidget {
-  soldProduct productt;
+  SoldProduct productt;
 
   LastOrderShape(this.productt);
 

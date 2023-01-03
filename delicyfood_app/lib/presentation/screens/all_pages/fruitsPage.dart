@@ -6,12 +6,12 @@ import 'package:delicyfood/presentation/widgets/vegetables_and_fruits/shapeItem.
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 
-class fruits extends StatefulWidget {
+class Fruits extends StatefulWidget {
   @override
-  _fruitsState createState() => _fruitsState();
+  _FruitsState createState() => _FruitsState();
 }
 
-class _fruitsState extends State<fruits> {
+class _FruitsState extends State<Fruits> {
   Widget page() {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -36,7 +36,7 @@ class _fruitsState extends State<fruits> {
                 showSearch(
                     context: context,
                     delegate:
-                        dataSearch(data: productListItem_fruits.list_categ));
+                        DataSearch(data: productListItem_fruits.list_categ));
               },
               icon: Icon(
                 Icons.search,
@@ -53,7 +53,7 @@ class _fruitsState extends State<fruits> {
               SizedBox(
                 height: 6,
               ),
-              advertisement("images/fruits_advetise.png", " Fruits",
+              Advertisement("images/fruits_advetise.png", " Fruits",
                   "delivery in 15 minutes", "free"),
               SizedBox(
                 height: 20,
@@ -80,7 +80,7 @@ class _fruitsState extends State<fruits> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

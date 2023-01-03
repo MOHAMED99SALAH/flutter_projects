@@ -1,7 +1,7 @@
 import 'package:delicyfood/presentation/screens/all_pages/Cart.dart';
 import 'package:flutter/material.dart';
 
-class buttomOrder extends StatelessWidget {
+class ButtomOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double ReallyWidth = MediaQuery.of(context).size.width;

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ShapeItem_Sold extends StatefulWidget {
-  product productt2;
+  Product productt2;
 
   ShapeItem_Sold(this.productt2);
 
@@ -16,7 +16,7 @@ class ShapeItem_Sold extends StatefulWidget {
 }
 
 class _ShapeItem_Sold extends State<ShapeItem_Sold> {
-  product productt3;
+  Product productt3;
   double q = 0;
 
   final CartBloc bloc = BlocProvider.getBloc<CartBloc>();

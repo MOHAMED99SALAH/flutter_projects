@@ -44,11 +44,11 @@ class Login extends StatelessWidget {
                   )
                 ],
               ),
-              firstHave(),
+              FirstHave(),
               Container(
                   height: MediaQuery.of(context).size.height / 3 +
                       MediaQuery.of(context).size.height / 3,
-                  child: secondHave())
+                  child: SecondHave())
             ],
           ),
         ]),

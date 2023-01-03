@@ -1,9 +1,9 @@
 import '../../data/models/product.dart';
 
 class CartProvider {
-  List<product> fooditems = [];
+  List<Product> fooditems = [];
 
-  List<product> addtolist(product foodItem) {
+  List<Product> addtolist(Product foodItem) {
     bool ispresent = false;
     if (fooditems.length > 0) {
       for (int i = 0; i < fooditems.length; i++) {
@@ -25,7 +25,7 @@ class CartProvider {
     return fooditems;
   }
 
-  List<product> removefromlist(product foodItem) {
+  List<Product> removefromlist(Product foodItem) {
     if (fooditems.length > 0) {
       for (int i = 0; i < fooditems.length; i++) {
         if (fooditems[i].name == foodItem.name) {

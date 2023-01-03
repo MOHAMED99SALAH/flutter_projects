@@ -2,22 +2,22 @@ import 'package:delicyfood/data/models/product.dart';
 import 'package:delicyfood/data/repository/repository.dart';
 import 'package:flutter/material.dart';
 
-class updateProduct extends StatefulWidget {
-  product productt;
+class UpdateProduct extends StatefulWidget {
+  Product productt;
 
-  updateProduct(this.productt);
+  UpdateProduct(this.productt);
   @override
-  State<updateProduct> createState() => _updateProductState();
+  State<UpdateProduct> createState() => _UpdateProductState();
 }
 
-class _updateProductState extends State<updateProduct> {
+class _UpdateProductState extends State<UpdateProduct> {
   String name;
   double price;
   double quantity;
   String imgPath;
   int Catg_id;
 
-  products_repository repo;
+  Products_repository repo;
 
   List cat_List = ["Vegetables -> 1", "Fruits -> 2"];
 
@@ -212,7 +212,7 @@ class _updateProductState extends State<updateProduct> {
                       color: Colors.white),
                 ),
                 onPressed: () async {
-                  product productUpdated = new product(widget.productt.id,
+                  Product productUpdated = new Product(widget.productt.id,
                       imgPath, name, price, quantity, Catg_id);
 
                   Future<bool> status = repo.updateProduct(productUpdated);

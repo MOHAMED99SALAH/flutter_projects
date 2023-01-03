@@ -3,13 +3,13 @@ import 'package:delicyfood/data/repository/repository.dart';
 import 'package:delicyfood/presentation/widgets/admin/updateShape.dart';
 import 'package:flutter/material.dart';
 
-class chooseUpdateProduct extends StatefulWidget {
+class ChooseUpdateProduct extends StatefulWidget {
   @override
-  State<chooseUpdateProduct> createState() => _chooseUpdateProductState();
+  State<ChooseUpdateProduct> createState() => _ChooseUpdateProductState();
 }
 
-class _chooseUpdateProductState extends State<chooseUpdateProduct> {
-  products_repository repo;
+class _ChooseUpdateProductState extends State<ChooseUpdateProduct> {
+  Products_repository repo;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _chooseUpdateProductState extends State<chooseUpdateProduct> {
                     );
                   },
                   itemBuilder: (context, index) {
-                    return updateShape(
+                    return UpdateShape(
                         productListItem_vegetables.list_categ[index]);
                   },
                 ),
@@ -104,7 +104,7 @@ class _chooseUpdateProductState extends State<chooseUpdateProduct> {
                     );
                   },
                   itemBuilder: (context, index) {
-                    return updateShape(
+                    return UpdateShape(
                         productListItem_fruits.list_categ[index]);
                   },
                 ),

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 
               //       primarySwatch: Colors.lightBlue,
               ),
-          home: getstart(),
+          home: Getstart(),
         ),
       ),
     );

@@ -6,14 +6,14 @@ import 'package:delicyfood/presentation/widgets/vegetables_and_fruits/shapeItem.
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter/material.dart';
 
-class vege_catg extends StatefulWidget {
+class Vegetables extends StatefulWidget {
   static bool buy = false;
 
   @override
-  _vege_catgState createState() => _vege_catgState();
+  _VegetablesState createState() => _VegetablesState();
 }
 
-class _vege_catgState extends State<vege_catg> {
+class _VegetablesState extends State<Vegetables> {
   @override
   void initState() {
     // TODO: implement initState
@@ -43,7 +43,7 @@ class _vege_catgState extends State<vege_catg> {
               onPressed: () {
                 showSearch(
                     context: context,
-                    delegate: dataSearch(
+                    delegate: DataSearch(
                         data: productListItem_vegetables.list_categ));
               },
               icon: Icon(
@@ -61,7 +61,7 @@ class _vege_catgState extends State<vege_catg> {
               SizedBox(
                 height: 6,
               ),
-              advertisement("images/vegetables_advertise.png", " vegetables",
+              Advertisement("images/vegetables_advertise.png", " vegetables",
                   "delivery in 15 minutes", "free"),
               SizedBox(
                 height: 20,
@@ -99,7 +99,7 @@ class _vege_catgState extends State<vege_catg> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

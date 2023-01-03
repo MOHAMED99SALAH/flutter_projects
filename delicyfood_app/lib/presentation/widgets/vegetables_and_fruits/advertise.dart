@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class advertise extends StatefulWidget {
+class Advertise extends StatefulWidget {
   final String image;
   final String resName;
   final String Description;
   final String status;
 
-  advertise(this.image, this.resName, this.Description, this.status);
+  Advertise(this.image, this.resName, this.Description, this.status);
 
   @override
-  _advertiseState createState() => _advertiseState();
+  _AdvertiseState createState() => _AdvertiseState();
 }
 
-class _advertiseState extends State<advertise>
+class _AdvertiseState extends State<Advertise>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation _animation;
@@ -36,7 +36,7 @@ class _advertiseState extends State<advertise>
     super.dispose();
   }
 
-  _advertiseState();
+  _AdvertiseState();
   @override
   Widget build(BuildContext context) {
     double ReallyWidth = MediaQuery.of(context).size.width;

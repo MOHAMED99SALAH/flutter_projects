@@ -5,14 +5,14 @@ abstract class ProductsState {}
 
 class ProductsInitial extends ProductsState {}
 
-class fruitsLoaded extends ProductsState {
-  final List<product> products;
+class FruitsLoaded extends ProductsState {
+  final List<Product> products;
 
-  fruitsLoaded(this.products);
+  FruitsLoaded(this.products);
 }
 
-class vegetablesLoaded extends ProductsState {
-  final List<product> products;
+class VegetablesLoaded extends ProductsState {
+  final List<Product> products;
 
-  vegetablesLoaded(this.products);
+  VegetablesLoaded(this.products);
 }

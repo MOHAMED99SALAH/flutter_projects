@@ -15,14 +15,14 @@ import 'package:provider/provider.dart';
 
 class Cart extends StatelessWidget {
   final CartBloc bloc = BlocProvider.getBloc<CartBloc>();
-  List<product> fooditems = [];
+  List<Product> fooditems = [];
 
   Widget page() {
     return StreamBuilder(
         stream: bloc.ListStream,
         builder: (context, snapshot) {
           if (snapshot.data != null) {
-            fooditems = (snapshot.data) as List<product>;
+            fooditems = (snapshot.data) as List<Product>;
 
             return ChangeNotifierProvider(
               create: (_) => TotalPrice(returntatal(fooditems)),
@@ -41,7 +41,7 @@ class Cart extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return GlobalSreen();
+                          return MapScreen();
                         }));
                       },
                       style: TextButton.styleFrom(
@@ -99,7 +99,7 @@ class Cart extends StatelessWidget {
                           height: 16,
                         ),
 
-                        voucher(),
+                        Voucher(),
 
                         SizedBox(
                           height: 16,
@@ -141,7 +141,7 @@ class Cart extends StatelessWidget {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(
@@ -152,7 +152,7 @@ class Cart extends StatelessWidget {
   }
 }
 
-double returntatal(List<product> fooditems) {
+double returntatal(List<Product> fooditems) {
   double totalprice = 0;
   for (int i = 0; i < fooditems.length; i++) {
     totalprice = totalprice + (fooditems[i].price * fooditems[i].quantity);

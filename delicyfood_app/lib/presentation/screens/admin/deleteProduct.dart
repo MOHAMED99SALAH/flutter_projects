@@ -5,15 +5,15 @@ import 'package:delicyfood/data/repository/repository.dart';
 import 'package:delicyfood/presentation/widgets/admin/deleteShape.dart';
 import 'package:flutter/material.dart';
 
-class deleteProduct extends StatefulWidget {
+class DeleteProduct extends StatefulWidget {
   @override
-  State<deleteProduct> createState() => _deleteProductState();
+  State<DeleteProduct> createState() => _DeleteProductState();
 }
 
-class _deleteProductState extends State<deleteProduct> {
+class _DeleteProductState extends State<DeleteProduct> {
   int item_id;
 
-  products_repository repo;
+  Products_repository repo;
 
   @override
   Widget build(BuildContext context) {

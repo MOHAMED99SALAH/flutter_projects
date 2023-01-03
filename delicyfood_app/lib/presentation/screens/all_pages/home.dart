@@ -1,6 +1,7 @@
 import 'package:delicyfood/presentation/widgets/global_widgets/SideBar.dart';
 import 'package:delicyfood/presentation/widgets/home/category.dart';
 import 'package:delicyfood/presentation/widgets/home/image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,17 +26,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           shared_data.getString("NUMBER") != "" ||
           shared_data.getString("PASS") != "" ||
           shared_data.getBool("STATE") == false) {
-        getstart.Name = shared_data.getString("NAME");
-        getstart.name_user = shared_data.getString("USERNAME");
-        getstart.password = shared_data.getString("PASS");
-        getstart.number = shared_data.getString("NUMBER");
-        getstart.state = shared_data.getBool("STATE");
+        Getstart.Name = shared_data.getString("NAME");
+        Getstart.name_user = shared_data.getString("USERNAME");
+        Getstart.password = shared_data.getString("PASS");
+        Getstart.number = shared_data.getString("NUMBER");
+        Getstart.state = shared_data.getBool("STATE");
       } else {
-        getstart.Name = "";
-        getstart.name_user = "";
-        getstart.password = "";
-        getstart.number = "";
-        getstart.state = false;
+        Getstart.Name = "";
+        Getstart.name_user = "";
+        Getstart.password = "";
+        Getstart.number = "";
+        Getstart.state = false;
       }
     });
   }
@@ -78,7 +79,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ));
           }),
         ),
-        drawer: sidebar(),
+        drawer: Sidebar(),
         body: SafeArea(
           child: ListView(
             children: <Widget>[
@@ -105,12 +106,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              categorey(
+                              Categorey(
                                   "images/vegetables_home.png", "vegetables"),
                               SizedBox(
                                 width: 15,
                               ),
-                              categorey("images/fruits_home.png", "Fruits"),
+                              Categorey("images/fruits_home.png", "Fruits"),
                               SizedBox(
                                 width: 50,
                               ),

@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ButtomExcute extends StatelessWidget {
-  List<product> soldProducts;
+  List<Product> soldProducts;
 
-  products_repository repo;
+  Products_repository repo;
 
   ButtomExcute(this.soldProducts);
 
@@ -28,7 +28,7 @@ class ButtomExcute extends StatelessWidget {
           onPressed: () {
             if (cost.num != 0) {
               if (cost.num > 15) {
-                if (GlobalSreen.status == false ) {
+                if (MapScreen.status == false ) {
                   SnackBar snackBar = SnackBar(
                     content: Text("Please Select Your Location"),
                     backgroundColor: Colors.blueGrey,
@@ -37,7 +37,7 @@ class ButtomExcute extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 } else {
                   String location_of_user =
-                      "Longitude : ${GlobalSreen.Mylocation.longitude} // Latitude : ${GlobalSreen.Mylocation.latitude}";
+                      "Longitude : ${MapScreen.Mylocation.longitude} // Latitude : ${MapScreen.Mylocation.latitude}";
                   Future<bool> status =
                       repo.addOrder(soldProducts,cost.num.toInt(),location_of_user);
 
@@ -46,7 +46,7 @@ class ButtomExcute extends StatelessWidget {
                       content: Text(
                         "Your order will arrive in 15 minutes " +
                             "  TO " +
-                            getstart.name_user,
+                            Getstart.name_user,
                         style: TextStyle(color: Colors.white),
                       ),
                       duration: Duration(milliseconds: 2500),

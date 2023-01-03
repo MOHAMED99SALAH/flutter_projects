@@ -3,21 +3,21 @@ import 'package:delicyfood/data/repository/repository.dart';
 import 'package:delicyfood/presentation/screens/admin/updateProduct.dart';
 import 'package:flutter/material.dart';
 
-class addProduct extends StatefulWidget {
-  const addProduct({Key key}) : super(key: key);
+class AddProduct extends StatefulWidget {
+  const AddProduct({Key key}) : super(key: key);
 
   @override
-  State<addProduct> createState() => _addProductState();
+  State<AddProduct> createState() => _AddProductState();
 }
 
-class _addProductState extends State<addProduct> {
+class _AddProductState extends State<AddProduct> {
   String name;
   double price;
   double quantity;
   String imgPath;
   int Catg_id;
 
-  products_repository repo;
+  Products_repository repo;
 
   List cat_List = ["Vegetables -> 1", "Fruits -> 2"];
 
@@ -208,8 +208,8 @@ class _addProductState extends State<addProduct> {
                       color: Colors.white),
                 ),
                 onPressed: () async {
-                  product addedProduct =
-                      new product(0, imgPath, name, price, quantity, Catg_id);
+                  Product addedProduct =
+                      new Product(0, imgPath, name, price, quantity, Catg_id);
                   Future<bool> status = repo.addProduct(addedProduct);
                   if (status == true) {
                     SnackBar snackBar = SnackBar(

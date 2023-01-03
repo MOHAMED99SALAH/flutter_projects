@@ -22,20 +22,21 @@ environment:
 
 dependencies:
   bloc: ^8.1.0
-  bloc_pattern: 
+  bloc_pattern: null
+  cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.2.1
-  firebase_core: 
+  firebase_core: null
   flutter:
     sdk: flutter
   flutter_offline: ^2.1.0
-  google_maps_flutter: 
+  geolocator: ^9.0.2
+  google_maps_flutter: null
   http: ^0.13.5
-  overlay_support: 
-  provider:
-  cached_network_image: ^3.2.3
-  rxdart: 
-  shared_preferences: 
+  overlay_support: null
+  provider: null
+  rxdart: null
+  shared_preferences: null
 dev_dependencies:
   flutter_test:
     sdk: flutter

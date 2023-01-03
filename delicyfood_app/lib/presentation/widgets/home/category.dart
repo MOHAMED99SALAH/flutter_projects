@@ -4,17 +4,17 @@ import 'package:delicyfood/presentation/screens/all_pages/fruitsPage.dart';
 import 'package:delicyfood/presentation/screens/all_pages/vegetablePage.dart';
 import 'package:flutter/material.dart';
 
-class categorey extends StatefulWidget {
+class Categorey extends StatefulWidget {
   final String image;
   final String resName;
 
-  categorey(this.image, this.resName);
+  Categorey(this.image, this.resName);
 
   @override
-  _categoreyState createState() => _categoreyState();
+  _CategoreyState createState() => _CategoreyState();
 }
 
-class _categoreyState extends State<categorey> {
+class _CategoreyState extends State<Categorey> {
   @override
   Widget build(BuildContext context) {
     double ReallyWidth = MediaQuery.of(context).size.width / 3;
@@ -27,11 +27,11 @@ class _categoreyState extends State<categorey> {
 
         if (widget.resName == "vegetables") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return vege_catg();
+            return Vegetables();
           }));
         } else {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return fruits();
+            return Fruits();
           }));
         }
       },

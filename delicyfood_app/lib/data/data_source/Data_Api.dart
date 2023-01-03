@@ -5,56 +5,56 @@ import '../models/product.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class data_api {
-  Future<List<product>> getDataVege() async {
+class Data_api {
+  Future<List<Product>> getDataVege() async {
     http.Response response = await http.Client()
         .get(Uri.parse("http://localhost:8080/delicyfood/getVegetables"));
 
     if (response.statusCode == 200) {
       var jsonData = json.decode(response.body);
-      List<product> products = [];
+      List<Product> products = [];
       for (var item in jsonData) {
-        products.add(product.fromJson(item));
+        products.add(Product.fromJson(item));
       }
       return products;
     }
   }
 
-  Future<List<product>> getDataFruits() async {
+  Future<List<Product>> getDataFruits() async {
     http.Response response = await http.Client()
         .get(Uri.parse("http://localhost:8080/delicyfood/getFruits"));
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-      List<product> products = [];
+      List<Product> products = [];
       for (var item in jsonData) {
-        products.add(product.fromJson(item));
+        products.add(Product.fromJson(item));
       }
       return products;
     }
     return null;
   }
 
-  Future<List<soldProduct>> getLastOrder() async {
+  Future<List<SoldProduct>> getLastOrder() async {
     http.Response response = await http.Client().get(Uri.parse(
-        "http://localhost:8080/delicyfood/lastOrder/${getstart.name_user}"));
+        "http://localhost:8080/delicyfood/lastOrder/${Getstart.name_user}"));
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-      List<soldProduct> LastOrder = [];
+      List<SoldProduct> LastOrder = [];
       for (var item in jsonData) {
-        LastOrder.add(soldProduct.fromJson(item));
+        LastOrder.add(SoldProduct.fromJson(item));
       }
       return LastOrder;
     }
     return null;
   }
 
-  Future<bool> addorder(List<product> products ,int total_price,String location) async {
+  Future<bool> addorder(List<Product> products ,int total_price,String location) async {
     var url = "http://localhost:8080/delicyfood/addOrder";
 
     var data = {
-      "email": getstart.name_user,
+      "email": Getstart.name_user,
       "location":location,
       "totalPrice":total_price,
       "order_details": [for (var p in products) p.toJson()]
@@ -67,7 +67,7 @@ class data_api {
     return false;
   }
 
-  Future<bool> addProduct(product product) async {
+  Future<bool> addProduct(Product product) async {
     var url = "http://localhost:8080/delicyfood/addProduct";
 
     var data = {
@@ -85,7 +85,7 @@ class data_api {
     return false;
   }
 
-  Future<bool> updateProduct(product product) async {
+  Future<bool> updateProduct(Product product) async {
     var url = "http://localhost:8080/delicyfood/updateProduct";
 
     var data = {

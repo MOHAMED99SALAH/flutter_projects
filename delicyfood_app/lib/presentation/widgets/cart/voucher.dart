@@ -2,15 +2,15 @@ import 'package:delicyfood/business/bloc/centralProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class voucher extends StatefulWidget {
+class Voucher extends StatefulWidget {
   int numV = 0;
   int couunt = 1;
 
   @override
-  _voucherState createState() => _voucherState();
+  _VoucherState createState() => _VoucherState();
 }
 
-class _voucherState extends State<voucher> {
+class _VoucherState extends State<Voucher> {
   @override
   Widget build(BuildContext context) {
     var cost = Provider.of<TotalPrice>(context, listen: false);

@@ -3,10 +3,10 @@ import 'package:delicyfood/data/models/product.dart';
 import 'package:delicyfood/presentation/screens/admin/updateProduct.dart';
 import 'package:flutter/material.dart';
 
-class updateShape extends StatelessWidget {
-  product productt;
+class UpdateShape extends StatelessWidget {
+  Product productt;
 
-  updateShape(this.productt);
+  UpdateShape(this.productt);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class updateShape extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return updateProduct(productt);
+              return UpdateProduct(productt);
             },
           ),
         );

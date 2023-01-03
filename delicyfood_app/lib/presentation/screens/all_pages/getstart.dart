@@ -8,7 +8,7 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class getstart extends StatefulWidget {
+class Getstart extends StatefulWidget {
   static String Name = "";
   static String name_user = "";
   static String number = "";
@@ -16,10 +16,10 @@ class getstart extends StatefulWidget {
   static bool state = false;
 
   @override
-  _getstartState createState() => _getstartState();
+  _GetstartState createState() => _GetstartState();
 }
 
-class _getstartState extends State<getstart> {
+class _GetstartState extends State<Getstart> {
   @override
   void initState() {
     // TODO: implement initState
@@ -45,17 +45,17 @@ class _getstartState extends State<getstart> {
           shared_data.getString("NUMBER") != "" ||
           shared_data.getString("PASS") != "" ||
           shared_data.getBool("STATE") == false) {
-        getstart.Name = shared_data.getString("NAME");
-        getstart.name_user = shared_data.getString("USERNAME");
-        getstart.password = shared_data.getString("PASS");
-        getstart.number = shared_data.getString("NUMBER");
-        getstart.state = shared_data.getBool("STATE");
+        Getstart.Name = shared_data.getString("NAME");
+        Getstart.name_user = shared_data.getString("USERNAME");
+        Getstart.password = shared_data.getString("PASS");
+        Getstart.number = shared_data.getString("NUMBER");
+        Getstart.state = shared_data.getBool("STATE");
       } else {
-        getstart.Name = "";
-        getstart.name_user = "";
-        getstart.password = "";
-        getstart.number = "";
-        getstart.state = false;
+        Getstart.Name = "";
+        Getstart.name_user = "";
+        Getstart.password = "";
+        Getstart.number = "";
+        Getstart.state = false;
       }
     });
   }
@@ -123,7 +123,7 @@ class _getstartState extends State<getstart> {
                       try {
                  //        _saveData("", "", "","", false);
 
-                        if (getstart.state == false) {
+                        if (Getstart.state == false) {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return Login();
@@ -164,7 +164,7 @@ class _getstartState extends State<getstart> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

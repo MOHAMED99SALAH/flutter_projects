@@ -3,36 +3,36 @@ import 'package:delicyfood/data/models/soldProduct.dart';
 
 import '../data_source/Data_Api.dart';
 
-class products_repository {
-  final data_api data;
+class Products_repository {
+  final Data_api data;
 
-  products_repository(this.data);
+  Products_repository(this.data);
 
-  Future<List<product>> getfruits() async {
-    List<product> products = await data.getDataFruits();
+  Future<List<Product>> getfruits() async {
+    List<Product> products = await data.getDataFruits();
 
     return products;
   }
 
-  Future<List<product>> getvege() async {
-    List<product> products = await data.getDataVege();
+  Future<List<Product>> getvege() async {
+    List<Product> products = await data.getDataVege();
     return products;
   }
 
-  Future<List<soldProduct>> getLastOrder() async {
-    List<soldProduct> products = await data.getLastOrder();
+  Future<List<SoldProduct>> getLastOrder() async {
+    List<SoldProduct> products = await data.getLastOrder();
     return products;
   }
 
-  Future<bool> addOrder(List<product> products ,int total_price,String location) async {
+  Future<bool> addOrder(List<Product> products ,int total_price,String location) async {
     return data.addorder(products ,total_price,location);
   }
 
-  Future<bool> addProduct(product product) async {
+  Future<bool> addProduct(Product product) async {
     return data.addProduct(product);
   }
 
-  Future<bool> updateProduct(product product) async {
+  Future<bool> updateProduct(Product product) async {
     return data.updateProduct(product);
   }
 

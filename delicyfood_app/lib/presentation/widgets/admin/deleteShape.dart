@@ -3,7 +3,7 @@ import 'package:delicyfood/data/models/product.dart';
 import 'package:flutter/material.dart';
 
 class DeleteShape extends StatelessWidget {
-  product productt;
+  Product productt;
 
   DeleteShape(this.productt);
 

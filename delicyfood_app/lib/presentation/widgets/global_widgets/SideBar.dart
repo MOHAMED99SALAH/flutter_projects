@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'collapsList.dart';
 
-class sidebar extends StatefulWidget {
-  const sidebar({Key key}) : super(key: key);
+class Sidebar extends StatefulWidget {
+  const Sidebar({Key key}) : super(key: key);
 
   @override
-  _sidebarState createState() => _sidebarState();
+  _SidebarState createState() => _SidebarState();
 }
 
-class _sidebarState extends State<sidebar> {
+class _SidebarState extends State<Sidebar> {
   double maxwidth = 230;
   double miniwidth = 60;
   final _auth = FirebaseAuth.instance;

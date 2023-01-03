@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class firstHave extends StatelessWidget {
+class FirstHave extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -36,7 +36,7 @@ class firstHave extends StatelessWidget {
   }
 }
 
-class secondHave extends StatelessWidget {
+class SecondHave extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
   static String _emaill = "";
 
@@ -127,7 +127,7 @@ class secondHave extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return data();
+                return ResetPassword();
               }));
             },
             child: Text(
@@ -191,7 +191,7 @@ class secondHave extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return adminPage();
+                            return AdminPage();
                           },
                         ),
                       );

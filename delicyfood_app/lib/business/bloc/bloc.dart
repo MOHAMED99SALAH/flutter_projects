@@ -6,18 +6,18 @@ import 'providerBloc.dart';
 
 class CartBloc extends BlocBase {
   CartBloc();
-  var _ListControler = BehaviorSubject<List<product>>.seeded([]);
+  var _ListControler = BehaviorSubject<List<Product>>.seeded([]);
   CartProvider provider = CartProvider();
 //out
-  Stream<List<product>> get ListStream => _ListControler.stream;
+  Stream<List<Product>> get ListStream => _ListControler.stream;
 // in
-  Sink<List<product>> get ListSink => _ListControler.sink;
+  Sink<List<Product>> get ListSink => _ListControler.sink;
 
-  addtolist(product fooditem) {
+  addtolist(Product fooditem) {
     ListSink.add(provider.addtolist(fooditem));
   }
 
-  removefromlist(product fooditem) {
+  removefromlist(Product fooditem) {
     ListSink.add(provider.removefromlist(fooditem));
   }
 

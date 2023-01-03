@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import '../../../business/bloc/bloc.dart';
 
 
-class advertisement extends StatefulWidget {
+class Advertisement extends StatefulWidget {
   final String image;
   final String resName;
   final String Description;
   final String status;
 
-  advertisement(this.image, this.resName, this.Description, this.status);
+  Advertisement(this.image, this.resName, this.Description, this.status);
 
   @override
-  _advertisementState createState() => _advertisementState();
+  _AdvertisementState createState() => _AdvertisementState();
 }
 
-class _advertisementState extends State<advertisement>
+class _AdvertisementState extends State<Advertisement>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation _animation;
@@ -148,7 +148,7 @@ class _advertisementState extends State<advertisement>
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            child: vege_catg.buy == false
+                            child: Vegetables.buy == false
                                 ? Container(
                                     height: 7,
                                   )

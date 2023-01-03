@@ -7,25 +7,25 @@ import '../../data/repository/repository.dart';
 part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
-  products_repository repository;
+  Products_repository repository;
 
   ProductsCubit(this.repository) : super(ProductsInitial());
 
-  Future<List<product>> getfruits() async {
-    List<product> products = [];
+  Future<List<Product>> getfruits() async {
+    List<Product> products = [];
 
     await repository.getfruits().then((productts) {
-      emit(fruitsLoaded(products));
+      emit(FruitsLoaded(products));
       products = productts;
     });
 
     return products;
   }
 
-  Future<List<product>> getVegetables() async {
-    List<product> products = [];
+  Future<List<Product>> getVegetables() async {
+    List<Product> products = [];
     await repository.getfruits().then((productts) {
-      emit(vegetablesLoaded(products));
+      emit(VegetablesLoaded(products));
       products = productts;
     });
     return products;

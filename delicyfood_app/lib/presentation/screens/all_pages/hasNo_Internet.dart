@@ -2,14 +2,14 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
-class noInternet extends StatefulWidget {
-  const noInternet({Key key}) : super(key: key);
+class NoInternet extends StatefulWidget {
+  const NoInternet({Key key}) : super(key: key);
 
   @override
-  State<noInternet> createState() => _noInternetState();
+  State<NoInternet> createState() => _NoInternetState();
 }
 
-class _noInternetState extends State<noInternet> {
+class _NoInternetState extends State<NoInternet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -2,14 +2,14 @@ import 'package:delicyfood/presentation/widgets/vegetables_and_fruits/shapeItem.
 import 'package:flutter/material.dart';
 import '../../../data/models/product.dart';
 
-class dataSearch extends SearchDelegate<String> {
-  List<product> data;
-  List<product> resultdata;
+class DataSearch extends SearchDelegate<String> {
+  List<Product> data;
+  List<Product> resultdata;
 
   bool found = true;
-  List<product> nulldata = [];
+  List<Product> nulldata = [];
 
-  dataSearch({this.data});
+  DataSearch({this.data});
 
   @override
   List<Widget> buildActions(BuildContext context) {

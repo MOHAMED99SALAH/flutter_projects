@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'login.dart';
 
-class data extends StatefulWidget {
+class ResetPassword extends StatefulWidget {
   @override
-  _dataState createState() => _dataState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _dataState extends State<data> {
+class _ResetPasswordState extends State<ResetPassword> {
   String _email = "";
   String password = "";
 
@@ -138,7 +138,7 @@ class _dataState extends State<data> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(
