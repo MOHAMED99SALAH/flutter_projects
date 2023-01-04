@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 firstHave(),
-                Container(height: 67.h, child: secondHave()),
+                Container(height: 67.h, child: SecondHave()),
               ],
             ),
           ),
@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

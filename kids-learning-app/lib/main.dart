@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               title: 'Kids_Learning',
               debugShowCheckedModeBanner: false,
-              home: getstart(),
+              home: Getstart(),
             );
           },
         ),

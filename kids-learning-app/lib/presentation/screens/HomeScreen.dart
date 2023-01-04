@@ -44,12 +44,12 @@ class _homeState extends State<home> {
   ImagePicker _imagePicker = ImagePicker();
   String translate_text = "";
   GoogleTranslator _googleTranslator = GoogleTranslator();
-  image img;
+  ImageModel img;
 
   @override
   void initState() {
     loadData();
-    online_USER = Child.online(getstart.name_user, getstart.phone);
+    online_USER = Child.online(Getstart.name_user, Getstart.phone);
     loadmodel().then((value) {
       setState(() {});
     });
@@ -95,7 +95,7 @@ class _homeState extends State<home> {
       await uploadTask.whenComplete(() async {
         var uploadPath = await uploadTask.snapshot.ref.getDownloadURL();
         // create image
-        img = image(uploadPath, tLink, getstart.name_user, date, uniquekey.id);
+        img = ImageModel(uploadPath, tLink, Getstart.name_user, date, uniquekey.id);
         if (uploadPath.isNotEmpty) {
           _firebaseFirestore.collection(collectionName).doc(uniquekey.id).set({
             "id": img.id,
@@ -158,7 +158,7 @@ class _homeState extends State<home> {
       BlocProvider.of<ImageCubit>(context).setImage(iimage);
     });
     loadImagetoModel(iimage);
-    if (getstart.name_user == "") {
+    if (Getstart.name_user == "") {
       showSimpleNotification(
           Text(
             "some thing wrong  ,try later",
@@ -179,7 +179,7 @@ class _homeState extends State<home> {
         BlocProvider.of<ImageCubit>(context).setImage(iimage);
       });
       loadImagetoModel(iimage);
-      if (getstart.name_user == "") {
+      if (Getstart.name_user == "") {
         showSimpleNotification(
             Text(
               "some thing wrong  ,try later",
@@ -207,15 +207,15 @@ class _homeState extends State<home> {
           shared_data.getString("USERNAME") != "" ||
           shared_data.getString("PHONE") != "" ||
           shared_data.getBool("STATE") == false) {
-        getstart.Name = shared_data.getString("NAME");
-        getstart.name_user = shared_data.getString("USERNAME");
-        getstart.phone = shared_data.getString("PHONE");
-        getstart.state = shared_data.getBool("STATE");
+        Getstart.Name = shared_data.getString("NAME");
+        Getstart.name_user = shared_data.getString("USERNAME");
+        Getstart.phone = shared_data.getString("PHONE");
+        Getstart.state = shared_data.getBool("STATE");
       } else {
-        getstart.Name = "";
-        getstart.name_user = "";
-        getstart.phone = "";
-        getstart.state = false;
+        Getstart.Name = "";
+        Getstart.name_user = "";
+        Getstart.phone = "";
+        Getstart.state = false;
       }
     });
   }
@@ -226,7 +226,7 @@ class _homeState extends State<home> {
         SystemNavigator.pop();
       },
       child: Scaffold(
-        drawer: sidebar(),
+        drawer: Sidebar(),
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: Builder(builder: (context) {
@@ -448,7 +448,7 @@ class _homeState extends State<home> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

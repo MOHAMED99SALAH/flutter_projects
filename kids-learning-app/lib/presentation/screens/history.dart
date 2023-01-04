@@ -100,7 +100,7 @@ class _historyState extends State<history> {
                     child: FutureBuilder<QuerySnapshot>(
                         future: _firebaseFirestore
                             .collection(collectionName)
-                            .where('id', isEqualTo: getstart.name_user)
+                            .where('id', isEqualTo: Getstart.name_user)
                             .get(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
@@ -116,7 +116,7 @@ class _historyState extends State<history> {
                             return ListView.builder(
                                 itemCount: photos.length,
                                 itemBuilder: (context, index) {
-                                  return itemShape(photos[index]);
+                                  return ItemShape(photos[index]);
                                 });
                           } else {
                             return Center(
@@ -154,7 +154,7 @@ class _historyState extends State<history> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class navigationmodel {
+class Navigationmodel {
   String title;
   IconData icon;
-  navigationmodel({this.title, this.icon});
+  Navigationmodel({this.title, this.icon});
 }
 
-List<navigationmodel> navigationitems = [
-  navigationmodel(
+List<Navigationmodel> navigationitems = [
+  Navigationmodel(
     title: "Home Page",
     icon: Icons.home,
   ),
-  navigationmodel(title: "Help", icon: Icons.help_outline),
-  navigationmodel(title: "Log Out", icon: Icons.logout),
+  Navigationmodel(title: "Help", icon: Icons.help_outline),
+  Navigationmodel(title: "Log Out", icon: Icons.logout),
 ];

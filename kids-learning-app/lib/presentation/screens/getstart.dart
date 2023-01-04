@@ -12,7 +12,7 @@ import 'package:sizer/sizer.dart';
 
 import '../widgets/bottomPart.dart';
 
-class getstart extends StatefulWidget {
+class Getstart extends StatefulWidget {
   static String Name = "";
   static String name_user = "";
 
@@ -21,10 +21,10 @@ class getstart extends StatefulWidget {
   static bool help = false;
 
   @override
-  _getstartState createState() => _getstartState();
+  _GetstartState createState() => _GetstartState();
 }
 
-class _getstartState extends State<getstart> with TickerProviderStateMixin {
+class _GetstartState extends State<Getstart> with TickerProviderStateMixin {
   bool hasinternet;
 
   ConnectivityResult result = ConnectivityResult.none;
@@ -87,15 +87,15 @@ class _getstartState extends State<getstart> with TickerProviderStateMixin {
           shared_data.getString("USERNAME") != "" ||
           shared_data.getString("PHONE") != "" ||
           shared_data.getBool("STATE") == false) {
-        getstart.Name = shared_data.getString("NAME");
-        getstart.name_user = shared_data.getString("USERNAME");
-        getstart.phone = shared_data.getString("PHONE");
-        getstart.state = shared_data.getBool("STATE");
+        Getstart.Name = shared_data.getString("NAME");
+        Getstart.name_user = shared_data.getString("USERNAME");
+        Getstart.phone = shared_data.getString("PHONE");
+        Getstart.state = shared_data.getBool("STATE");
       } else {
-        getstart.Name = "";
-        getstart.name_user = "";
-        getstart.phone = "";
-        getstart.state = false;
+        Getstart.Name = "";
+        Getstart.name_user = "";
+        Getstart.phone = "";
+        Getstart.state = false;
       }
     });
   }
@@ -170,7 +170,7 @@ class _getstartState extends State<getstart> with TickerProviderStateMixin {
                 height: 4.h,
               ),
               // Text bottom part
-              Visibility(visible: copAnimated, child: bottomPart()),
+              Visibility(visible: copAnimated, child: BottomPart()),
             ],
           ),
         ),
@@ -191,7 +191,7 @@ class _getstartState extends State<getstart> with TickerProviderStateMixin {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

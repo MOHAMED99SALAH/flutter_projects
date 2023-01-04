@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:kids/data/repository/cash.dart';
 import 'package:kids/presentation/screens/hasNo_Internet.dart';
 import 'login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:sizer/sizer.dart';
 
-class help extends StatefulWidget {
+class Help extends StatefulWidget {
   @override
-  _helpState createState() => _helpState();
+  _HelpState createState() => _HelpState();
 }
 
-class _helpState extends State<help> {
+class _HelpState extends State<Help> {
   CarouselController control = CarouselController();
+  CashData cashedData = new CashData();
   int activeIndex = 0;
   final images = [
     "assets/1.jpg",
@@ -168,7 +170,7 @@ class _helpState extends State<help> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

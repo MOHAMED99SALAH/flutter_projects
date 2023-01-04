@@ -1,16 +1,16 @@
-import 'package:animals/models/model_char.dart';
+import 'package:animals/models/CharacterModel.dart';
 import 'package:animals/widgets/charac_widget.dart';
 import 'package:flutter/material.dart';
 
-class list_screen extends StatefulWidget{
+class Home_screen extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _list_screen();
+    return _Home_screen ();
   }
 
 }
-class _list_screen extends State<list_screen>{
+class _Home_screen extends State<Home_screen>{
   PageController pageController;
   int currentpage =0;
 

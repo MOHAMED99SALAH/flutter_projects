@@ -10,16 +10,16 @@ import '../../data/repository/weatherRepo.dart';
 
 import 'package:sizer/sizer.dart';
 
-class showweather extends StatefulWidget {
+class Show_Weather extends StatefulWidget {
   String city;
 
-  showweather(this.city);
+  Show_Weather(this.city);
 
   @override
-  State<showweather> createState() => _showweatherState();
+  State<Show_Weather> createState() => _Show_WeatherState();
 }
 
-class _showweatherState extends State<showweather> {
+class _Show_WeatherState extends State<Show_Weather> {
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _showweatherState extends State<showweather> {
   Widget page(DateTime dateTime, BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            WeatherCubit(weatherRepo(Weather_API()))..getTemp(widget.city),
+            WeatherCubit(WeatherRepo(Weather_API()))..getTemp(widget.city),
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
@@ -54,7 +54,7 @@ class _showweatherState extends State<showweather> {
                   ),
                 );
               } else if (state is WeatherLoaded) {
-                weather_module model = (state).model;
+                Weather_module model = (state).model;
                 //FutureBuilder(
                 //  future:data.getweather(widget.city) ,
                 //    builder: (context, snapdata) {
@@ -221,7 +221,7 @@ class _showweatherState extends State<showweather> {
         if (connected) {
           return page(dateTime, context);
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

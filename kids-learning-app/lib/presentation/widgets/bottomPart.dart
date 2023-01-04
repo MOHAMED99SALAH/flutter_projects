@@ -6,14 +6,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import '../screens/HomeScreen.dart';
 
-class bottomPart extends StatefulWidget {
-  const bottomPart({Key key}) : super(key: key);
+class BottomPart extends StatefulWidget {
+  const BottomPart({Key key}) : super(key: key);
 
   @override
-  State<bottomPart> createState() => _bottomPartState();
+  State<BottomPart> createState() => _BottomPartState();
 }
 
-class _bottomPartState extends State<bottomPart> {
+class _BottomPartState extends State<BottomPart> {
   _saveData(String name, String username, String phone, bool state) async {
     SharedPreferences shared_data = await SharedPreferences.getInstance();
     shared_data.setString("NAME", name);
@@ -31,9 +31,9 @@ class _bottomPartState extends State<bottomPart> {
     SharedPreferences help_data = await SharedPreferences.getInstance();
     setState(() {
       if (help_data.getBool("HELP") == false) {
-        getstart.help = help_data.getBool("HELP");
+        Getstart.help = help_data.getBool("HELP");
       } else {
-        getstart.help = true;
+        Getstart.help = true;
       }
     });
   }
@@ -79,12 +79,12 @@ class _bottomPartState extends State<bottomPart> {
                 //_saveData("", "", "", false);
                // _help(false);
 
-                if (getstart.help == false) {
+                if (Getstart.help == false) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return help();
+                    return Help();
                   }));
                 } else {
-                  if (getstart.state == false) {
+                  if (Getstart.state == false) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return Login();

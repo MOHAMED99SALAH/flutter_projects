@@ -10,9 +10,9 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:sizer/sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class detail extends StatelessWidget {
+class Detail extends StatelessWidget {
   DocumentSnapshot data;
-  detail(this.data);
+  Detail(this.data);
 
   Future spelling(String text) async {
     final FlutterTts _flutterTts = FlutterTts();
@@ -35,7 +35,7 @@ class detail extends StatelessWidget {
       //         launch("https://www.google.com/search?q=$tLink%5D&sxsrf=APq-WBu9hQMhmFK-dacxJI3G1IexEcdSFw:1649632536958&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjn6v-K0Ir3AhUC3qQKHaaJBGEQ_AUoAXoECAMQAw&biw=1396&bih=685&dpr=1.38");
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return web(
+        return WebPage(
             "https://www.google.com/search?q=$link%5D&sxsrf=APq-WBu9hQMhmFK-dacxJI3G1IexEcdSFw:1649632536958&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjn6v-K0Ir3AhUC3qQKHaaJBGEQ_AUoAXoECAMQAw&biw=1396&bih=685&dpr=1.38");
       }));
     }
@@ -188,7 +188,7 @@ class detail extends StatelessWidget {
         if (connected) {
           return page(context);
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

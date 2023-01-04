@@ -10,7 +10,7 @@ class weather extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, screenType) {
-      return MaterialApp(debugShowCheckedModeBanner: false, home: searchpage());
+      return MaterialApp(debugShowCheckedModeBanner: false, home: Searchpage());
     });
   }
 }

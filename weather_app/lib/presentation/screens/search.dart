@@ -8,7 +8,7 @@ import 'package:weather/presentation/screens/hasNo_Internet.dart';
 import 'package:weather/presentation/screens/showweather.dart';
 import 'package:sizer/sizer.dart';
 
-class searchpage extends StatelessWidget {
+class Searchpage extends StatelessWidget {
   Widget page(TextEditingController editor, BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -105,7 +105,7 @@ class searchpage extends StatelessWidget {
                         } else {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return showweather(editor.text.toLowerCase());
+                            return Show_Weather(editor.text.toLowerCase());
                           }));
                         }
                       },
@@ -128,7 +128,7 @@ class searchpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    weatherRepo repo = weatherRepo(Weather_API());
+    WeatherRepo repo = WeatherRepo(Weather_API());
     WeatherCubit weatherCubit = WeatherCubit(repo);
 
     TextEditingController editor = TextEditingController();
@@ -145,7 +145,7 @@ class searchpage extends StatelessWidget {
         if (connected) {
           return page(editor, context);
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

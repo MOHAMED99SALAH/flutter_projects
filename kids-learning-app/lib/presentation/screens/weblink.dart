@@ -4,14 +4,14 @@ import 'package:kids/presentation/screens/hasNo_Internet.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:sizer/sizer.dart';
 
-class web extends StatefulWidget {
+class WebPage extends StatefulWidget {
   String link;
-  web(this.link);
+  WebPage(this.link);
   @override
-  _webState createState() => _webState();
+  _WebPageState createState() => _WebPageState();
 }
 
-class _webState extends State<web> {
+class _WebPageState extends State<WebPage> {
   Widget page() {
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +54,7 @@ class _webState extends State<web> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

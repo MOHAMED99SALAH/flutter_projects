@@ -1,4 +1,4 @@
-import 'package:animals/pagaes/list_screen.dart';
+import 'package:animals/pagaes/HomeScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.white
       ),
       debugShowCheckedModeBanner: false,
-      home: list_screen(),
+      home: Home_screen(),
     );
   }
 }

@@ -1,22 +1,22 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:animals/models/model_char.dart';
+import 'package:animals/models/CharacterModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-class chraclistscreen extends StatefulWidget
+class Characters_screen extends StatefulWidget
 {
-  final character chracter;
+  final Character chracter;
 
 
-  chraclistscreen({Key key,this.chracter}):super(key : key);
+  Characters_screen({this.chracter});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-   return _chraclistscreen();
+   return _Characters_screen();
   }
 
 }
-class _chraclistscreen extends State<chraclistscreen> with AfterLayoutMixin<chraclistscreen>
+class _Characters_screen extends State<Characters_screen> with AfterLayoutMixin<Characters_screen>
 {
   double currentsheetpp=-330;
   double expandedsheet=0;

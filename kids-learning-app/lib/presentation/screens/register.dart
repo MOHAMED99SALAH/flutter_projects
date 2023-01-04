@@ -288,7 +288,7 @@ class _RegisterState extends State<Register> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

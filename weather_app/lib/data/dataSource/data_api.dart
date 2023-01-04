@@ -4,7 +4,7 @@ import 'dart:convert';
 import '../models/weather_module.dart';
 
 class Weather_API {
-  weather_module model;
+  Weather_module model;
 
   Future<dynamic> getweather(String city) async {
     final result = await http.Client().get(
@@ -17,7 +17,7 @@ class Weather_API {
     final jsondecod = json.decode(result.body);
     final jsonweather = jsondecod["main"];
 
-    model = weather_module.fromjson(jsonweather);
+    model = Weather_module.fromjson(jsonweather);
     return model;
   }
 }

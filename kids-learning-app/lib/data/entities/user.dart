@@ -60,7 +60,7 @@ class Child {
       //         launch("https://www.google.com/search?q=$tLink%5D&sxsrf=APq-WBu9hQMhmFK-dacxJI3G1IexEcdSFw:1649632536958&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjn6v-K0Ir3AhUC3qQKHaaJBGEQ_AUoAXoECAMQAw&biw=1396&bih=685&dpr=1.38");
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return web(
+        return WebPage(
             "https://www.google.com/search?q=$link%5D&sxsrf=APq-WBu9hQMhmFK-dacxJI3G1IexEcdSFw:1649632536958&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjn6v-K0Ir3AhUC3qQKHaaJBGEQ_AUoAXoECAMQAw&biw=1396&bih=685&dpr=1.38");
       }));
     }

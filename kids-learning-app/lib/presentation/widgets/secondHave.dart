@@ -9,7 +9,7 @@ import '../screens/HomeScreen.dart';
 import '../screens/register.dart';
 import '../screens/resetPassword.dart';
 
-class secondHave extends StatelessWidget {
+class SecondHave extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
 
   static String _emaill = "";
@@ -99,7 +99,7 @@ class secondHave extends StatelessWidget {
             GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return data();
+                    return ResetPassword();
                   }));
                 },
                 child: Text(

@@ -10,7 +10,7 @@ abstract class WeatherState extends Equatable {
 class WeatherInitial extends WeatherState {}
 
 class WeatherLoaded extends WeatherState {
-  weather_module model;
+  Weather_module model;
   WeatherLoaded(this.model);
 }
 

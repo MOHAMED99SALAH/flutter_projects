@@ -6,7 +6,7 @@ import '../../data/repository/weatherRepo.dart';
 part 'weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
-  final weatherRepo repo;
+  final WeatherRepo repo;
 
   WeatherCubit(this.repo) : super(WeatherInitial());
 

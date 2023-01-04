@@ -7,12 +7,12 @@ import 'package:overlay_support/overlay_support.dart';
 import 'login.dart';
 import 'package:sizer/sizer.dart';
 
-class data extends StatefulWidget {
+class ResetPassword extends StatefulWidget {
   @override
-  _dataState createState() => _dataState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _dataState extends State<data> {
+class _ResetPasswordState extends State<ResetPassword> {
   String _email = "";
   String password = "";
   String confirmPass = "";
@@ -175,7 +175,7 @@ class _dataState extends State<data> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

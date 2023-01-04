@@ -10,14 +10,14 @@ import 'navigationModel.dart';
 import '../screens/login.dart';
 import 'package:sizer/sizer.dart';
 
-class sidebar extends StatefulWidget {
-  const sidebar({Key key}) : super(key: key);
+class Sidebar extends StatefulWidget {
+  const Sidebar({Key key}) : super(key: key);
 
   @override
-  _sidebarState createState() => _sidebarState();
+  _SidebarState createState() => _SidebarState();
 }
 
-class _sidebarState extends State<sidebar> {
+class _SidebarState extends State<Sidebar> {
   final _auth = FirebaseAuth.instance;
 
   _saveData(bool state) async {

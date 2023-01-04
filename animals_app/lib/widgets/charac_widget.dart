@@ -1,14 +1,14 @@
 
 
 
-import 'package:animals/models/model_char.dart';
-import 'package:animals/pagaes/charac_list_screen.dart';
+import 'package:animals/models/CharacterModel.dart';
+import 'package:animals/pagaes/characters_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:animals/models/model_char.dart';
+import 'package:animals/models/CharacterModel.dart';
 
 class charac_widget extends StatelessWidget
 {
-  final character charac ;
+  final Character charac ;
 
  final PageController pageController;
  final int currentpage ;
@@ -22,7 +22,7 @@ class charac_widget extends StatelessWidget
     // TODO: implement build
    return InkWell(
      onTap: (){
-       Navigator.push(context, PageRouteBuilder(transitionDuration: Duration(milliseconds: 350), pageBuilder: (context,_,__) => chraclistscreen(chracter:charac)
+       Navigator.push(context, PageRouteBuilder(transitionDuration: Duration(milliseconds: 350), pageBuilder: (context,_,__) => Characters_screen(chracter:charac)
        ));
      },
      child: AnimatedBuilder(

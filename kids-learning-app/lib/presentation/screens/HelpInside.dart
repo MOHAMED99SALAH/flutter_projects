@@ -151,7 +151,7 @@ class _HELPINSIDEState extends State<HELPINSIDE> {
         if (connected) {
           return page();
         } else {
-          return noInternet();
+          return NoInternet();
         }
       },
       child: Center(

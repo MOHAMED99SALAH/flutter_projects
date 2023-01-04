@@ -8,7 +8,7 @@ import 'package:path/path.dart' as p;
 import 'package:sizer/sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class itemShape extends StatelessWidget {
+class ItemShape extends StatelessWidget {
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -18,7 +18,7 @@ class itemShape extends StatelessWidget {
 
   DocumentSnapshot data;
 
-  itemShape(this.data);
+  ItemShape(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class itemShape extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return detail(data);
+          return Detail(data);
         }));
       },
       child: Container(
