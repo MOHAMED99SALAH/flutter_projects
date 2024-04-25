@@ -2,10 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delicyfood/data/models/soldProduct.dart';
 import 'package:flutter/material.dart';
 
-class LastOrderShape extends StatelessWidget {
-  SoldProduct productt;
+import '../../../data/models/order_details.dart';
+import '../../../data/models/product.dart';
 
-  LastOrderShape(this.productt);
+class LastOrderShape extends StatelessWidget {
+  Product productt;
+  int qauantity;
+
+  LastOrderShape(this.productt, this.qauantity);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class LastOrderShape extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Text(productt.name,
+                Text(productt.name!,
                     style: TextStyle(
                         fontSize: 22,
                         color: Colors.black,
@@ -48,7 +52,7 @@ class LastOrderShape extends StatelessWidget {
               width: 52,
             ),
             CachedNetworkImage(
-              imageUrl: productt.imagePath,
+              imageUrl: productt.imagePath!,
               imageBuilder: (context, imageProvider) => Container(
                 height: 145,
                 width: 130,

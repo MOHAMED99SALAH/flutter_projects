@@ -5,8 +5,6 @@ import 'package:delicyfood/presentation/screens/admin/updatedchoosenProduct.dart
 import 'package:flutter/material.dart';
 
 class AdminPage extends StatefulWidget {
-  const AdminPage({Key key}) : super(key: key);
-
   @override
   State<AdminPage> createState() => _AdminPageState();
 }
@@ -21,6 +19,16 @@ class _AdminPageState extends State<AdminPage> {
           title: Text(
             "Admin ",
             style: TextStyle(color: Colors.teal[700]),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.teal[700],
+              size: 25,
+            ),
           ),
           backgroundColor: Colors.white,
           centerTitle: true),

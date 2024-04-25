@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 class Body extends StatefulWidget {
   final Product product;
-  const Body({Key key, this.product}) : super(key: key);
+
+  const Body(this.product);
+
   @override
   _BodyState createState() => _BodyState();
 }
@@ -41,13 +43,13 @@ class _BodyState extends State<Body> {
                             SizedBox(
                               height: 57,
                             ),
-                            ColorAndSize(product: widget.product),
+                            ColorAndSize(widget.product),
                             SizedBox(height: 15),
-                            Description(product: widget.product),
+                            Description(widget.product),
                             SizedBox(height: 15),
                             CounterWithFavBtn(),
-                            SizedBox(height: 25),
-                            AddToCart(product: widget.product)
+                            SizedBox(height: 70),
+                            AddToCart(widget.product)
                           ],
                         ),
                       )),
@@ -85,14 +87,10 @@ class _BodyState extends State<Body> {
                                   children: [
                                     TextSpan(text: "Price\n"),
                                     TextSpan(
-                                      text: "\$${widget.product.price}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          .copyWith(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                    ),
+                                        text: "\$${widget.product.price}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4),
                                   ],
                                 ),
                               ),

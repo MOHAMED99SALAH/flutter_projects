@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delicyfood/data/models/user.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +26,14 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return WillPopScope(
-      onWillPop: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Login();
-        }));
+      onWillPop: () async {
+        bool value = true;
+        if (value == true) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Login();
+          }));
+        }
+        return value;
       },
       child: Scaffold(
         body: SingleChildScrollView(
@@ -208,6 +214,12 @@ class Register extends StatelessWidget {
                         final user = await _auth.createUserWithEmailAndPassword(
                             email: _email.trim(), password: _pass.trim());
 
+                        userr _user = new userr(
+                            email: _email.trim(),
+                            password: _pass.trim(),
+                            phone: num.trim());
+
+                        _user.uploadDataUser(context);
                         if (user != null) {
                           _saveData(name, _email, _pass, num, false);
                           Navigator.push(

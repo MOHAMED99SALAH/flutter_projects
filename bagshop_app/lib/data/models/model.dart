@@ -4,7 +4,8 @@ class Product {
   final String image, title, description;
   final int price, size, id;
   final Color color;
-  Product({
+
+  Product(
     this.id,
     this.image,
     this.title,
@@ -12,5 +13,5 @@ class Product {
     this.description,
     this.size,
     this.color,
-  });
+  );
 }

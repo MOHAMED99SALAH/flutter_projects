@@ -3,25 +3,40 @@ import 'package:delicyfood/data/repository/repository.dart';
 import 'package:delicyfood/presentation/screens/admin/updateProduct.dart';
 import 'package:flutter/material.dart';
 
-class AddProduct extends StatefulWidget {
-  const AddProduct({Key key}) : super(key: key);
+import '../../../data/data_source/Data_Api.dart';
+import '../../../data/models/add_product.dart';
 
+class AddProduct extends StatefulWidget {
   @override
   State<AddProduct> createState() => _AddProductState();
 }
 
 class _AddProductState extends State<AddProduct> {
-  String name;
-  double price;
-  double quantity;
-  String imgPath;
-  int Catg_id;
+  String? name;
+  double? price;
+  double? quantity;
+  String? imgPath;
+  int? Catg_id;
 
-  Products_repository repo;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
+  TextEditingController imgPathController = TextEditingController();
+  TextEditingController catg_idController = TextEditingController();
+
+  Data_api? _data_api;
+  Products_repository? repo;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _data_api = new Data_api();
+    repo = new Products_repository(_data_api!);
+  }
 
   List cat_List = ["Vegetables -> 1", "Fruits -> 2"];
 
-  String valueChoose;
+  String? valueChoose;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +47,16 @@ class _AddProductState extends State<AddProduct> {
           title: Text(
             "add Product ",
             style: TextStyle(color: Colors.teal[700]),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.teal[700],
+              size: 25,
+            ),
           ),
           backgroundColor: Colors.white,
           centerTitle: true),
@@ -49,6 +74,7 @@ class _AddProductState extends State<AddProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
+                    controller: nameController,
                     onChanged: (value) {
                       name = value;
                     },
@@ -73,6 +99,7 @@ class _AddProductState extends State<AddProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
+                    controller: priceController,
                     onChanged: (value) {
                       price = double.parse(value);
                     },
@@ -97,6 +124,7 @@ class _AddProductState extends State<AddProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
+                    controller: quantityController,
                     onChanged: (value) {
                       quantity = double.parse(value);
                     },
@@ -121,6 +149,7 @@ class _AddProductState extends State<AddProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
+                    controller: imgPathController,
                     onChanged: (value) {
                       imgPath = value;
                     },
@@ -168,7 +197,7 @@ class _AddProductState extends State<AddProduct> {
                               Catg_id = 2;
                             }
 
-                            valueChoose = value;
+                            valueChoose = value.toString();
                           });
                         },
                         items: cat_List.map((item) {
@@ -208,27 +237,81 @@ class _AddProductState extends State<AddProduct> {
                       color: Colors.white),
                 ),
                 onPressed: () async {
-                  Product addedProduct =
-                      new Product(0, imgPath, name, price, quantity, Catg_id);
-                  Future<bool> status = repo.addProduct(addedProduct);
-                  if (status == true) {
+                  if (nameController.text!.isEmpty ||
+                      priceController.text!.isEmpty ||
+                      quantityController.text!.isEmpty ||
+                      imgPathController.text!.isEmpty ||
+                      Catg_id == null) {
                     SnackBar snackBar = SnackBar(
-                      content: Text("item added successfully",
-                          style: TextStyle(color: Colors.white)),
-                      backgroundColor: Colors.blueGrey,
-                      duration: Duration(milliseconds: 400),
+                      content: Text("Please complete all Fields",
+                          style: TextStyle(color: Colors.black)),
+                      backgroundColor: Colors.red,
+                      duration: Duration(milliseconds: 2000),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   } else {
-                    SnackBar snackBar = SnackBar(
-                      content: Text(
-                        "some thing went wrong",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      backgroundColor: Color.fromARGB(255, 177, 44, 44),
-                      duration: Duration(milliseconds: 400),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Warning",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            content: Text("Are you sure to add the item ?"),
+                            actions: [
+                              MaterialButton(
+                                child: Text(
+                                  "Yes",
+                                ),
+                                onPressed: () async {
+                                  Added_product addedProduct =
+                                      new Added_product(
+                                          imgPathController.text,
+                                          nameController.text,
+                                          priceController.text.toString(),
+                                          quantityController.text.toString(),
+                                          Catg_id.toString());
+
+                                  bool status =
+                                      await repo!.addProduct(addedProduct);
+                                  if (status == true) {
+                                    Navigator.of(context).pop();
+                                    SnackBar snackBar = SnackBar(
+                                      content: Text("item added successfully",
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      backgroundColor: Colors.blueGrey,
+                                      duration: Duration(milliseconds: 1200),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  } else {
+                                    SnackBar snackBar = SnackBar(
+                                      content: Text(
+                                        "some thing went wrong",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 177, 44, 44),
+                                      duration: Duration(milliseconds: 1200),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
+                              MaterialButton(
+                                child: Text(
+                                  "No",
+                                ),
+                                onPressed: () async {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
                   }
                 },
               ),

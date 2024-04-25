@@ -1,9 +1,16 @@
 import 'package:delicyfood/presentation/screens/admin/adminPage.dart';
 import 'package:delicyfood/presentation/screens/all_pages/home.dart';
 import 'package:delicyfood/presentation/screens/all_pages/resetPassword.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../data/data_source/Data_Api.dart';
+import '../../../data/models/driver.dart';
+import '../../../data/repository/repository.dart';
+import '../../screens/all_pages/marketPage.dart';
+import '../../screens/driver/driver_orders.dart';
 
 class FirstHave extends StatelessWidget {
   @override
@@ -36,7 +43,17 @@ class FirstHave extends StatelessWidget {
   }
 }
 
-class SecondHave extends StatelessWidget {
+class SecondHave extends StatefulWidget {
+  const SecondHave({super.key});
+
+  @override
+  State<SecondHave> createState() => _SecondHaveState();
+}
+
+class _SecondHaveState extends State<SecondHave> {
+  Data_api? _data_api;
+  Products_repository? repo;
+
   final _auth = FirebaseAuth.instance;
   static String _emaill = "";
 
@@ -45,6 +62,13 @@ class SecondHave extends StatelessWidget {
   TextEditingController emailr = TextEditingController();
   TextEditingController passr = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _data_api = Data_api();
+    repo = Products_repository(_data_api!);
+  }
+
   _saveData(bool state) async {
     SharedPreferences shared_data = await SharedPreferences.getInstance();
 
@@ -52,13 +76,14 @@ class SecondHave extends StatelessWidget {
   }
 
   _saveDataa(String name, String username, String Pass, String number,
-      bool state) async {
+      bool state, String user_ID) async {
     SharedPreferences shared_data = await SharedPreferences.getInstance();
     shared_data.setString("NAME", name);
     shared_data.setString("USERNAME", username);
     shared_data.setString("PASS", Pass);
     shared_data.setString("NUMBER", number);
     shared_data.setBool("STATE", state);
+    shared_data.setString("USERID", user_ID);
   }
 
   @override
@@ -176,44 +201,65 @@ class SecondHave extends StatelessWidget {
                       backgroundColor: Colors.blueGrey,
                     ));
                   } else {
+                    final UserCredential userCredential =
+                        await _auth.signInWithEmailAndPassword(
+                            email: _emaill.trim(), password: _passw.trim());
 
-                  
-                    final user = await _auth.signInWithEmailAndPassword(
-                        email: _emaill.trim(), password: _passw.trim());
-                    if (user != null) {
-                      _saveDataa("", _emaill, _passw, "", true);
+                    final User? user = userCredential.user;
+
+                    String? id = user!.uid;
+                    String? email = user!.email;
+
+                    if (userCredential != null) {
+                      _saveDataa("", _emaill, _passw, "", true, id!);
                       _saveData(true);
 
-                    
-                     if(_emaill=="midoosalah2000@gmail.com" &&_passw=="999999"){
+                      String check = await repo!.checkDriver(email!);
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return AdminPage();
-                          },
-                        ),
-                      );
-
-                     }else
-                     {
-  Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Home();
-                          },
-                        ),
-                      );
-                     }
-
-                    
+                      if (check == "true") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return driver_Orders();
+                            },
+                          ),
+                        );
+                      } else if (check == "error") {
+                        SnackBar snackBar = SnackBar(
+                          content: Text(
+                            "some thing went wrong",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          backgroundColor: Color.fromARGB(255, 177, 44, 44),
+                          duration: Duration(milliseconds: 1200),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else if (_emaill == "midoosalah2000@gmail.com" &&
+                          _passw == "999999") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return marketPage();
+                            },
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Home();
+                            },
+                          ),
+                        );
+                      }
                     }
                   }
                 } on FirebaseAuthException catch (error) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(error.message),
+                    content: Text(error.message!),
                     backgroundColor: Colors.blueGrey,
                   ));
                 }

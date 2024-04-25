@@ -2,10 +2,9 @@ import 'package:bagshop/data/models/model.dart';
 import 'package:flutter/material.dart';
 
 class ColorAndSize extends StatelessWidget {
-  const ColorAndSize({
-    Key key,
+  const ColorAndSize(
     this.product,
-  }) : super(key: key);
+  );
 
   final Product product;
 
@@ -21,11 +20,11 @@ class ColorAndSize extends StatelessWidget {
               Row(
                 children: <Widget>[
                   ColorDot(
-                    color: Color(0xFF356C95),
+                    Color(0xFF356C95),
                     isSelected: true,
                   ),
-                  ColorDot(color: Color(0xFFF8C078)),
-                  ColorDot(color: Color(0xFFA29B9B)),
+                  ColorDot(Color(0xFFF8C078)),
+                  ColorDot(Color(0xFFA29B9B)),
                 ],
               ),
             ],
@@ -38,12 +37,8 @@ class ColorAndSize extends StatelessWidget {
               children: [
                 TextSpan(text: "Size\n"),
                 TextSpan(
-                  text: "${product.size} cm",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(fontWeight: FontWeight.bold),
-                )
+                    text: "${product.size} cm",
+                    style: Theme.of(context).textTheme.headline5)
               ],
             ),
           ),
@@ -56,12 +51,10 @@ class ColorAndSize extends StatelessWidget {
 class ColorDot extends StatelessWidget {
   final Color color;
   final bool isSelected;
-  const ColorDot({
-    Key key,
-    this.color,
-    // by default isSelected is false
-    this.isSelected = false,
-  }) : super(key: key);
+
+  const ColorDot(this.color,
+      // by default isSelected is false
+      {this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {

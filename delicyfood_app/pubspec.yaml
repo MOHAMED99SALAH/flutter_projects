@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
   bloc: ^8.1.0
@@ -26,16 +26,24 @@ dependencies:
   cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.2.1
-  firebase_core: null
+  firebase_core:
+  cloud_firestore:
+  firebase_messaging:
+  flutter_menu:
+  location:
+  firebase_admin:
   flutter:
     sdk: flutter
   flutter_offline: ^2.1.0
   geolocator: ^9.0.2
-  google_maps_flutter: null
   http: ^0.13.5
+  awesome_notifications:
+  flutter_local_notifications:
+  loading_animation_widget:
   overlay_support: null
   provider: null
   rxdart: null
+  lottie: 
   shared_preferences: null
 dev_dependencies:
   flutter_test:

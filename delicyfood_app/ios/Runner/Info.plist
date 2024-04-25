@@ -41,5 +41,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<string>NSLocationWhenInUseUsageDescription</string>
+    <key>want to track loction</key>
+
+    <string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
+    <key>want to track loction</key>
 </dict>
 </plist>

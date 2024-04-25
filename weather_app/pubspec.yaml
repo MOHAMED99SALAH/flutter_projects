@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -27,18 +27,22 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cupertino_icons: null
-  equatable: null
-  flare_flutter: null
+  cupertino_icons:
+  animated_text_kit:
+  curved_navigation_bar: ^1.0.3
+  equatable:
+  geolocator:
+  geocoding:
+  flare_flutter:
   flutter:
     sdk: flutter
-  flutter_bloc: null
-  flutter_offline: ^2.1.0
-  http: ^0.12.0+2
-  lottie: ^2.0.0
-  overlay_support: null
-  responsive_sizer: ^3.1.1
-  sizer: ^2.0.15
+  flutter_bloc:
+  flutter_offline:
+  http:
+  lottie:
+  overlay_support:
+  responsive_sizer:
+  sizer:
 
 dev_dependencies:
   flutter_lints: ^1.0.0

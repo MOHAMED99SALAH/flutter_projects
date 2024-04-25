@@ -1,33 +1,42 @@
+import 'dart:convert';
+
+Product productModelJson(String str) => Product.fromJson(json.decode(str));
+String productTojson(Product data) => json.encode(data.toJson());
+
 class Product {
-  int id;
-  String name;
-  double price;
-  double quantity;
-  String imagePath;
-  int catgID;
+  int? id;
+  String? name;
+  double? price;
+  double? quantity;
+  String? imagePath;
+  int? catgID;
   Product(this.id, this.imagePath, this.name, this.price, this.quantity,
       this.catgID);
 
   void incrementQ() {
-    quantity++;
+    quantity = quantity! + 1;
   }
 
   void decrementQ() {
-    quantity--;
+    quantity = quantity! - 1;
   }
 
   Product.fromJson(Map<String, dynamic> list) {
     this.id = list['productID'];
     this.name = list['name'];
-    this.price = list['price'];
+    this.price = double.parse(list['price']);
     this.quantity = list['quantity'];
     this.imagePath = list['imagePath'];
     this.catgID = list['cat_id'];
   }
 
   Map<String, dynamic> toJson() => {
-        "product": {"productID": this.id},
-        "quantity": this.quantity
+        "productID": this.id,
+        "name": this.name,
+        "price": this.price,
+        "quantity": this.quantity,
+        "imagePath": this.imagePath,
+        "cat_id": this.catgID
       };
 }
 

@@ -15,4 +15,8 @@ class WeatherRepo {
 
     return model;
   }
+
+  Future<String> getlocation() async {
+    return data.getLocation();
+  }
 }

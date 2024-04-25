@@ -5,6 +5,8 @@ import 'package:delicyfood/presentation/widgets/home/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../data/models/product.dart';
+import '../../widgets/cart/soldItems.dart';
 import 'getstart.dart';
 import 'Cart.dart';
 
@@ -14,6 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  List<Product>? itmes_sold;
   @override
   void initState() {
     _loadData();
@@ -43,10 +46,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double ReallyWidth = MediaQuery.of(context).size.width;
+    double? ReallyWidth = MediaQuery.of(context).size.width;
     return WillPopScope(
-      onWillPop: () {
-        SystemNavigator.pop();
+      onWillPop: () async {
+        bool value = true;
+        if (value == true) {
+          SystemNavigator.pop();
+        }
+        return value;
       },
       child: Scaffold(
         backgroundColor: Colors.white,

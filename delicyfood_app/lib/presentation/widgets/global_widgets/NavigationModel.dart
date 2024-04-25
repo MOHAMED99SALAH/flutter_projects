@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../main.dart';
 
 class Navigationmodel {
-  String title;
-  IconData icon;
+  String? title;
+  IconData? icon;
 
   Navigationmodel({this.title, this.icon});
 }

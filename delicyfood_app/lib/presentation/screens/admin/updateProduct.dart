@@ -2,28 +2,39 @@ import 'package:delicyfood/data/models/product.dart';
 import 'package:delicyfood/data/repository/repository.dart';
 import 'package:flutter/material.dart';
 
-class UpdateProduct extends StatefulWidget {
-  Product productt;
+import '../../../data/data_source/Data_Api.dart';
 
-  UpdateProduct(this.productt);
+class UpdateProduct extends StatefulWidget {
+  Product UpdatedProduct;
+
+  UpdateProduct(this.UpdatedProduct);
   @override
   State<UpdateProduct> createState() => _UpdateProductState();
 }
 
 class _UpdateProductState extends State<UpdateProduct> {
-  String name;
-  double price;
-  double quantity;
-  String imgPath;
-  int Catg_id;
+  Data_api? _data_api;
+  Products_repository? repo;
 
-  Products_repository repo;
+  String? price = "not empty";
+  String? quantity = " not empty ";
+  String? name = " not empty";
+  String? imgPath = " not empty";
+  String? Catg_id = " not empty";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _data_api = new Data_api();
+    repo = new Products_repository(_data_api!);
+  }
 
   List cat_List = ["Vegetables -> 1", "Fruits -> 2"];
 
   @override
   Widget build(BuildContext context) {
-    int Category_id = widget.productt.catgID;
+    int? Category_id = widget.UpdatedProduct.catgID;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -32,6 +43,16 @@ class _UpdateProductState extends State<UpdateProduct> {
           title: Text(
             "update Product ",
             style: TextStyle(color: Colors.teal[700]),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.teal[700],
+              size: 25,
+            ),
           ),
           backgroundColor: Colors.white,
           centerTitle: true),
@@ -49,9 +70,11 @@ class _UpdateProductState extends State<UpdateProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
-                    initialValue: widget.productt.name,
+                    initialValue: widget.UpdatedProduct.name,
                     onChanged: (value) {
-                      name = value;
+                      setState(() {
+                        name = value;
+                      });
                     },
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
@@ -74,9 +97,9 @@ class _UpdateProductState extends State<UpdateProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
-                    initialValue: widget.productt.price.toString(),
+                    initialValue: widget.UpdatedProduct.price.toString(),
                     onChanged: (value) {
-                      price = double.parse(value);
+                      price = value;
                     },
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -99,9 +122,9 @@ class _UpdateProductState extends State<UpdateProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
-                    initialValue: widget.productt.quantity.toString(),
+                    initialValue: widget.UpdatedProduct.quantity.toString(),
                     onChanged: (value) {
-                      quantity = double.parse(value);
+                      quantity = value;
                     },
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -124,9 +147,11 @@ class _UpdateProductState extends State<UpdateProduct> {
                 Padding(
                   padding: EdgeInsets.only(left: 17, right: 17),
                   child: TextFormField(
-                    initialValue: widget.productt.imagePath,
+                    initialValue: widget.UpdatedProduct.imagePath.toString(),
                     onChanged: (value) {
-                      imgPath = value;
+                      setState(() {
+                        imgPath = value;
+                      });
                     },
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
@@ -165,12 +190,10 @@ class _UpdateProductState extends State<UpdateProduct> {
                         onChanged: (value) {
                           setState(() {
                             if (value == "Vegetables -> 1") {
-                              Catg_id = 1;
                               Category_id = 1;
                             }
 
                             if (value == "Fruits -> 2") {
-                              Catg_id = 2;
                               Category_id = 2;
                             }
                           });
@@ -212,30 +235,80 @@ class _UpdateProductState extends State<UpdateProduct> {
                       color: Colors.white),
                 ),
                 onPressed: () async {
-                  Product productUpdated = new Product(widget.productt.id,
-                      imgPath, name, price, quantity, Catg_id);
-
-                  Future<bool> status = repo.updateProduct(productUpdated);
-                  if (status == true) {
+                  if (name!.isEmpty ||
+                      price!.isEmpty ||
+                      quantity!.isEmpty ||
+                      imgPath!.isEmpty ||
+                      widget.UpdatedProduct.catgID!.toString().isEmpty) {
                     SnackBar snackBar = SnackBar(
-                      content: Text(
-                        "item updated successfully",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: Colors.blueGrey,
-                      duration: Duration(milliseconds: 400),
+                      content: Text("Please complete all Fields",
+                          style: TextStyle(color: Colors.black)),
+                      backgroundColor: Colors.red,
+                      duration: Duration(milliseconds: 2000),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   } else {
-                    SnackBar snackBar = SnackBar(
-                      content: Text(
-                        "some thing went wrong",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      backgroundColor: Color.fromARGB(255, 177, 44, 44),
-                      duration: Duration(milliseconds: 400),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Warning",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            content: Text("Are you sure to update the item ?"),
+                            actions: [
+                              MaterialButton(
+                                child: Text(
+                                  "Yes",
+                                ),
+                                onPressed: () async {
+                                  Product Updated_Product = new Product(
+                                      widget.UpdatedProduct.id,
+                                      imgPath,
+                                      name,
+                                      double.parse(price.toString()),
+                                      double.parse(quantity.toString()),
+                                      widget.UpdatedProduct.catgID);
+                                  bool status = await repo!
+                                      .updateProduct(Updated_Product);
+                                  if (status == true) {
+                                    Navigator.of(context).pop();
+                                    SnackBar snackBar = SnackBar(
+                                      content: Text("item updated successfully",
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      backgroundColor: Colors.blueGrey,
+                                      duration: Duration(milliseconds: 1200),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  } else {
+                                    SnackBar snackBar = SnackBar(
+                                      content: Text(
+                                        "some thing went wrong",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 177, 44, 44),
+                                      duration: Duration(milliseconds: 1200),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
+                              MaterialButton(
+                                child: Text(
+                                  "No",
+                                ),
+                                onPressed: () async {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
                   }
                 },
               ),

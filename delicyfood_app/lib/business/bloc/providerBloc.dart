@@ -16,12 +16,13 @@ class CartProvider {
         }
       }
       if (!ispresent) {
+        foodItem.quantity=1;
         fooditems.add(foodItem);
       }
     } else {
+      foodItem.quantity=1;
       fooditems.add(foodItem);
     }
-
     return fooditems;
   }
 
@@ -29,7 +30,7 @@ class CartProvider {
     if (fooditems.length > 0) {
       for (int i = 0; i < fooditems.length; i++) {
         if (fooditems[i].name == foodItem.name) {
-          if (foodItem.quantity > 1) {
+          if (foodItem.quantity! > 1) {
             fooditems[i].decrementQ();
           } else {
             fooditems.remove(foodItem);

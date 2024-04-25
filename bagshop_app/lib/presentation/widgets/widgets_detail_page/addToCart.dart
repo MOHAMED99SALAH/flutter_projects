@@ -2,10 +2,7 @@ import 'package:bagshop/data/models/model.dart';
 import 'package:flutter/material.dart';
 
 class AddToCart extends StatelessWidget {
-  const AddToCart({
-    Key key,
-    this.product,
-  }) : super(key: key);
+  const AddToCart(this.product);
 
   final Product product;
 

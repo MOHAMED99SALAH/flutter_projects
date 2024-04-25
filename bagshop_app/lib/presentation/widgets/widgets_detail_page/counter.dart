@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CounterWithFavBtn extends StatelessWidget {
-  const CounterWithFavBtn({
-    Key key,
-  }) : super(key: key);
+  const CounterWithFavBtn();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +21,7 @@ class CartCounter extends StatefulWidget {
 
 class _CartCounterState extends State<CartCounter> {
   int numOfItems = 1;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -55,7 +54,7 @@ class _CartCounterState extends State<CartCounter> {
     );
   }
 
-  SizedBox buildOutlineButton({IconData icon, Function press}) {
+  SizedBox buildOutlineButton({IconData? icon, VoidCallback? press}) {
     return SizedBox(
       width: 40,
       height: 32,

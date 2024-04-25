@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../data/models/product.dart';
 
 class DataSearch extends SearchDelegate<String> {
-  List<Product> data;
-  List<Product> resultdata;
+  List<Product>? data;
+  List<Product>? resultdata;
 
-  bool found = true;
-  List<Product> nulldata = [];
+  bool? found = true;
+  List<Product>? nulldata = [];
 
-  DataSearch({this.data});
+  DataSearch(this.data);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -40,9 +40,9 @@ class DataSearch extends SearchDelegate<String> {
 
     var realdata = query.isEmpty
         ? nulldata
-        : data.where((p) => p.name.startsWith(query)).toList();
+        : data!.where((p) => p.name!.startsWith(query)).toList();
     return ListView.builder(
-        itemCount: realdata.length,
+        itemCount: realdata!.length,
         itemBuilder: (context, index) {
           return Shape(realdata[index]);
         });
@@ -54,9 +54,9 @@ class DataSearch extends SearchDelegate<String> {
 
     var searcheddata = query.isEmpty
         ? nulldata
-        : data.where((p) => p.name.startsWith(query)).toList();
+        : data!.where((p) => p.name!.startsWith(query)).toList();
     return ListView.builder(
-        itemCount: searcheddata.length,
+        itemCount: searcheddata!.length,
         itemBuilder: (context, index) {
           return Shape(searcheddata[index]);
         });

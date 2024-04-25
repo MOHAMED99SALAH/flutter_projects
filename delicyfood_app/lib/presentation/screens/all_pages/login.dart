@@ -10,8 +10,12 @@ class Login extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: WillPopScope(
-        onWillPop: () {
-          SystemNavigator.pop();
+        onWillPop: () async {
+          bool value = true;
+          if (value == true) {
+            SystemNavigator.pop();
+          }
+          return value;
         },
         child: ListView(children: <Widget>[
           Column(

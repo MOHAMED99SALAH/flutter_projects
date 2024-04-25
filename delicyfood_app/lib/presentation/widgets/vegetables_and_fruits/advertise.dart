@@ -14,14 +14,14 @@ class Advertise extends StatefulWidget {
 
 class _AdvertiseState extends State<Advertise>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation _animation;
+  AnimationController? _animationController;
+  Animation? _animation;
   @override
   void initState() {
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 210))
           ..repeat();
-    _animation = Tween(begin: 50.0, end: 200.0).animate(_animationController)
+    _animation = Tween(begin: 50.0, end: 200.0).animate(_animationController!)
       ..addStatusListener((status) {})
       ..addListener(() {
         setState(() {});
@@ -32,7 +32,7 @@ class _AdvertiseState extends State<Advertise>
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -99,7 +99,7 @@ class _AdvertiseState extends State<Advertise>
                           fontWeight: FontWeight.w300,
                           color: Colors.black87)),
                   Transform.rotate(
-                    angle: 3.14 / 2 * _animation.value,
+                    angle: 3.14 / 2 * _animation!.value,
                     child: Icon(Icons.delivery_dining),
                   )
                 ],

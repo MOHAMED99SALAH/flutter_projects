@@ -7,9 +7,9 @@ import 'package:delicyfood/presentation/screens/all_pages/vegetablePage.dart';
 
 
 class Listproducts_sold extends StatefulWidget {
-  static List<Product> itmes_sold;
+  static List<Product>? itmes_sold;
 
-  Listproducts_sold(itmes) {
+    Listproducts_sold(itmes) {
     itmes_sold = itmes;
   }
 
@@ -26,17 +26,17 @@ class _Listproducts_soldState extends State<Listproducts_sold> {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: Listproducts_sold.itmes_sold.length,
+        itemCount: Listproducts_sold.itmes_sold!.length,
         itemBuilder: (BuildContext context, int index) {
           return Dismissible(
-              key: Key(Listproducts_sold.itmes_sold[index].name),
+              key: Key(Listproducts_sold.itmes_sold![index].name!),
               onDismissed: (direction) {
                 setState(() {
-                  cost.decremnt(Listproducts_sold.itmes_sold[index].price *
-                      Listproducts_sold.itmes_sold[index].quantity);
-                  Listproducts_sold.itmes_sold.removeAt(index);
+                  cost.decremnt(Listproducts_sold.itmes_sold![index].price! *
+                      Listproducts_sold.itmes_sold![index].quantity!);
+                  Listproducts_sold.itmes_sold!.removeAt(index);
                   setState(() {
-                    if (Listproducts_sold.itmes_sold.length == 0) {
+                    if (Listproducts_sold.itmes_sold!.length == 0) {
                       Vegetables.buy = false;
                     } else {
                       Vegetables.buy = true;
@@ -44,7 +44,7 @@ class _Listproducts_soldState extends State<Listproducts_sold> {
                   });
                 });
               },
-              child: ShapeItem_Sold(Listproducts_sold.itmes_sold[index]));
+              child: ShapeItem_Sold(Listproducts_sold.itmes_sold![index]));
         });
   }
 }

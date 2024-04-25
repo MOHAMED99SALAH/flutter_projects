@@ -5,10 +5,48 @@ import 'package:weather/business/cubit/weather_cubit.dart';
 import 'package:weather/data/dataSource/data_api.dart';
 import 'package:weather/data/repository/weatherRepo.dart';
 import 'package:weather/presentation/screens/hasNo_Internet.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:weather/presentation/screens/showweather.dart';
 import 'package:sizer/sizer.dart';
 
-class Searchpage extends StatelessWidget {
+class Searchpage extends StatefulWidget {
+  const Searchpage({super.key});
+
+  @override
+  State<Searchpage> createState() => _SearchpageState();
+}
+
+class _SearchpageState extends State<Searchpage> {
+  @override
+  Widget build(BuildContext context) {
+    WeatherRepo repo = WeatherRepo(Weather_API());
+    WeatherCubit weatherCubit = WeatherCubit(repo);
+
+    TextEditingController editor = TextEditingController();
+
+    return OfflineBuilder(
+      connectivityBuilder: (
+        BuildContext context,
+        ConnectivityResult connectivity,
+        Widget child,
+      ) {
+        final bool connected = connectivity != ConnectivityResult.none;
+
+        if (connected) {
+          return page(editor, context);
+        } else {
+          return NoInternet();
+        }
+      },
+      child: Center(
+          child: CircularProgressIndicator(
+        color: Colors.teal[700],
+      )),
+    );
+    ;
+  }
+
   Widget page(TextEditingController editor, BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +63,7 @@ class Searchpage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Container(
         child: Padding(
-          padding: EdgeInsets.only(left: 9.w, right: 9.w),
+          padding: EdgeInsets.only(left: 0.w, right: 0.w),
           child: ListView(
             scrollDirection: Axis.vertical,
             children: <Widget>[
@@ -36,12 +74,18 @@ class Searchpage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Search Weather ",
-                    style: TextStyle(
-                        fontSize: 29.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
+                  AnimatedTextKit(
+                    isRepeatingAnimation: true,
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Search Weather ',
+                        textStyle: TextStyle(
+                            fontSize: 29.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ),
+                    ],
+                    onTap: () {},
                   ),
                   SizedBox(
                     height: 3.h,
@@ -65,93 +109,90 @@ class Searchpage extends StatelessWidget {
                   SizedBox(
                     height: 3.h,
                   ),
-                  TextFormField(
-                    controller: editor,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Colors.white70,
-                        size: 6.w,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.w)),
-                          borderSide: BorderSide(
-                              color: Colors.white70, style: BorderStyle.solid)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.w)),
-                          borderSide: BorderSide(
-                              color: Colors.white70, style: BorderStyle.solid)),
-                      hintText: "City Name",
-                      hintStyle:
-                          TextStyle(color: Colors.white, fontSize: 12.sp),
-                    ),
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                  SizedBox(height: 6.h),
                   Container(
-                    width: 80.w,
-                    height: 7.h,
-                    child: MaterialButton(
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(3.w))),
-                      onPressed: () {
-                        if (editor.text == "") {
-                          showSimpleNotification(
-                              Text(
-                                "Enter City Name",
-                                style: TextStyle(color: Colors.blueGrey),
-                              ),
-                              background: Colors.white);
-                        } else {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Show_Weather(editor.text.toLowerCase());
-                          }));
-                        }
-                      },
+                    height: MediaQuery.of(context).size.height / 2,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
                       color: Colors.white,
-                      child: Text(
-                        " Search  ",
-                        style:
-                            TextStyle(color: Colors.blueGrey, fontSize: 16.sp),
-                      ),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.w),
+                          topRight: Radius.circular(20.w)),
                     ),
-                  ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 7.w,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 5.w, right: 5.w),
+                          child: TextFormField(
+                            controller: editor,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.blueGrey,
+                                size: 6.w,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.w)),
+                                  borderSide: BorderSide(
+                                      color: Colors.blueGrey,
+                                      style: BorderStyle.solid)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.w)),
+                                  borderSide: BorderSide(
+                                      color: Colors.blueGrey,
+                                      style: BorderStyle.solid)),
+                              hintText: "City Name",
+                              hintStyle: TextStyle(
+                                  color: Colors.blueGrey, fontSize: 12.sp),
+                            ),
+                            style: TextStyle(color: Colors.blueGrey),
+                          ),
+                        ),
+                        SizedBox(height: 6.5.h),
+                        Container(
+                          width: 80.w,
+                          height: 7.h,
+                          child: MaterialButton(
+                            shape: new RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3.w))),
+                            onPressed: () {
+                              if (editor.text == "") {
+                                showSimpleNotification(
+                                    Text(
+                                      "Enter City Name",
+                                      style: TextStyle(color: Colors.blueGrey),
+                                    ),
+                                    background: Colors.white);
+                              } else {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return Show_Weather(
+                                      editor.text.toLowerCase());
+                                }));
+                              }
+                            },
+                            color: Colors.blueGrey,
+                            child: Text(
+                              " Search  ",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 16.sp),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    WeatherRepo repo = WeatherRepo(Weather_API());
-    WeatherCubit weatherCubit = WeatherCubit(repo);
-
-    TextEditingController editor = TextEditingController();
-
-    // TODO: implement build
-    return OfflineBuilder(
-      connectivityBuilder: (
-        BuildContext context,
-        ConnectivityResult connectivity,
-        Widget child,
-      ) {
-        final bool connected = connectivity != ConnectivityResult.none;
-
-        if (connected) {
-          return page(editor, context);
-        } else {
-          return NoInternet();
-        }
-      },
-      child: Center(
-          child: CircularProgressIndicator(
-        color: Colors.teal[700],
-      )),
     );
   }
 }

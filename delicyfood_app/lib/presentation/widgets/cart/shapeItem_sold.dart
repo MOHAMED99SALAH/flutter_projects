@@ -25,7 +25,7 @@ class _ShapeItem_Sold extends State<ShapeItem_Sold> {
 
   @override
   Widget build(BuildContext context) {
-    q = productt3.quantity;
+    q = productt3.quantity!;
     double ReallyWidth = MediaQuery.of(context).size.width;
     var cost = Provider.of<TotalPrice>(context, listen: false);
     return GestureDetector(
@@ -46,7 +46,7 @@ class _ShapeItem_Sold extends State<ShapeItem_Sold> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text(productt3.name,
+                  Text(productt3.name!,
                       style: TextStyle(
                           fontSize: 22,
                           color: Colors.black,
@@ -76,8 +76,8 @@ class _ShapeItem_Sold extends State<ShapeItem_Sold> {
                             onPressed: () {
                               setState(() {
                                 if (productt3.quantity == 1) {}
-                                if (productt3.quantity > 1) {
-                                  cost.decremnt(productt3.price);
+                                if (productt3.quantity! > 1) {
+                                  cost.decremnt(productt3.price!);
                                   productt3.decrementQ();
 
                                   setState(() {
@@ -104,7 +104,7 @@ class _ShapeItem_Sold extends State<ShapeItem_Sold> {
                             ),
                             onPressed: () {
                               setState(() {
-                                cost.icremnt(productt3.price);
+                                cost.icremnt(productt3.price!);
                                 productt3.incrementQ();
 
                                 setState(() {
@@ -123,7 +123,7 @@ class _ShapeItem_Sold extends State<ShapeItem_Sold> {
                 width: 15,
               ),
               CachedNetworkImage(
-                imageUrl: productt3.imagePath,
+                imageUrl: productt3.imagePath!,
                 imageBuilder: (context, imageProvider) => Container(
                   height: 145,
                   width: 130,

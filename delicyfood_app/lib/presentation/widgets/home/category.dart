@@ -23,8 +23,6 @@ class _CategoreyState extends State<Categorey> {
     // TODO: implement build
     return GestureDetector(
       onTap: () {
-
-
         if (widget.resName == "vegetables") {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Vegetables();

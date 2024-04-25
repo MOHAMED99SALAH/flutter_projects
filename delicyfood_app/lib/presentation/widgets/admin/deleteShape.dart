@@ -29,7 +29,7 @@ class DeleteShape extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Text(productt.name,
+                Text(productt.name!,
                     style: TextStyle(
                         fontSize: 22,
                         color: Colors.black,
@@ -48,7 +48,7 @@ class DeleteShape extends StatelessWidget {
               width: 52,
             ),
             CachedNetworkImage(
-              imageUrl: productt.imagePath,
+              imageUrl: productt.imagePath!,
               imageBuilder: (context, imageProvider) => Container(
                 height: 145,
                 width: 130,

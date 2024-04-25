@@ -5,13 +5,14 @@ import '../../data/models/model.dart';
 class DetailsScreen extends StatelessWidget {
   final Product product;
 
-  const DetailsScreen({Key key, this.product}) : super(key: key);
+  const DetailsScreen(this.product);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: product.color,
       appBar: buildAppBar(context),
-      body: Body(product: product),
+      body: Body(product),
     );
   }
 
@@ -28,15 +29,17 @@ class DetailsScreen extends StatelessWidget {
       ),
       actions: <Widget>[
         IconButton(
+            onPressed: () {},
             icon: Icon(
-          Icons.search,
-          color: Colors.white,
-        )),
+              Icons.search,
+              color: Colors.white,
+            )),
         IconButton(
+            onPressed: () {},
             icon: Icon(
-          Icons.shopping_cart,
-          color: Colors.white,
-        )),
+              Icons.shopping_cart,
+              color: Colors.white,
+            )),
         SizedBox(width: 10 / 2)
       ],
     );

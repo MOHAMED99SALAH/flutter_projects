@@ -108,7 +108,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     }));
                   } on FirebaseAuthException catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(e.message),
+                      content: Text(e.message!),
                       backgroundColor: Colors.blueGrey,
                     ));
                     Navigator.push(context,

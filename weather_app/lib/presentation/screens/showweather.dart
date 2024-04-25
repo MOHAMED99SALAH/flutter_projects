@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather/data/dataSource/data_api.dart';
+
 import 'package:weather/presentation/screens/hasNo_Internet.dart';
 import '../../business/cubit/weather_cubit.dart';
+import '../../data/models/weather_item.dart';
 import '../../data/models/weather_module.dart';
 import '../../data/repository/weatherRepo.dart';
 
@@ -20,6 +22,29 @@ class Show_Weather extends StatefulWidget {
 }
 
 class _Show_WeatherState extends State<Show_Weather> {
+  String getWeatherAnimation(String description) {
+    if (description == null) return 'assets/sunny.json';
+    switch (description.toLowerCase()) {
+      case 'clouds':
+      case 'mist':
+      case 'smoke':
+      case 'haze':
+      case 'dust':
+      case 'fog':
+        return 'assets/cloud.json';
+      case 'rain':
+      case 'drizzle':
+      case 'shower rain':
+        return 'assets/rainy.json';
+      case 'thunderstorm':
+        return 'assets/mist.json';
+      case 'clear':
+        return 'assets/sunny.json';
+      default:
+        return 'assets/cloud.json';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -36,7 +61,7 @@ class _Show_WeatherState extends State<Show_Weather> {
             elevation: 0,
             backgroundColor: Colors.blueGrey,
             title: Text(
-              "Temperatures Now ",
+              "Weather Now ",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -74,116 +99,56 @@ class _Show_WeatherState extends State<Show_Weather> {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Center(
-                          child: Hero(
-                            tag: "logo",
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4.w)),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/explorer-optimize.gif"),
-                                    fit: BoxFit.cover,
-                                  )),
-                              height: 33.h,
-                              width: 86.w,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "   Last updated ",
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            Text(
-                              "${dateTime}   ",
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: .2.h,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: 7.h,
-                        ),
                         Text(
                           widget.city,
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 23.sp),
+                              fontSize: 30.sp),
                         ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Lottie.asset(getWeatherAnimation(model.getDescription)),
                         SizedBox(
                           height: 6.h,
                         ),
                         Text(
-                          model.getTemp.round().toString() + " c",
+                          model.getTemp.round().toString() + " °c",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w900,
-                              fontSize: 25.sp),
+                              fontSize: 50.sp),
                         ),
                         Text(
-                          "Temperature",
+                          model.getDescription,
                           style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 8.sp),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.sp),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                        SizedBox(
+                          height: 7.h,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 4.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    model.getTempMin.round().toString() + " c",
-                                    style: TextStyle(
-                                        fontSize: 25.sp,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                  Text(
-                                    "Minimum temperature",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 8.sp),
-                                  ),
-                                ],
+                            children: [
+                              WeatherItem(
+                                value: model.getwidspeed,
+                                unit: 'km/h',
+                                imageUrl: 'assets/windspeed.png',
                               ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    model.getTempMax.round().toString() + " c",
-                                    style: TextStyle(
-                                        fontSize: 25.sp,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                  Text(
-                                    "maximal temperature",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 8.sp),
-                                  ),
-                                ],
+                              WeatherItem(
+                                value: model.humidity,
+                                unit: '%',
+                                imageUrl: 'assets/humidity.png',
+                              ),
+                              WeatherItem(
+                                value: model.clouds,
+                                unit: '%',
+                                imageUrl: 'assets/cloud.png',
                               ),
                             ],
                           ),
@@ -200,6 +165,8 @@ class _Show_WeatherState extends State<Show_Weather> {
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                 );
+              } else {
+                return Container();
               }
             }),
           ),

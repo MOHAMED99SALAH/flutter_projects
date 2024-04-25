@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -34,6 +34,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  cached_network_image: ^3.2.3
+  animated_text_kit: ^4.2.2
+  curved_navigation_bar: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +68,7 @@ flutter:
     - images/bag_4.png
     - images/bag_5.png
     - images/bag_6.png
+    - images/1024px-Search_Icon.svg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

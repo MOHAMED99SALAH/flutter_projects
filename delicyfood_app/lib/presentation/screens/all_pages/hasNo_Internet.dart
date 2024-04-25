@@ -3,8 +3,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
 class NoInternet extends StatefulWidget {
-  const NoInternet({Key key}) : super(key: key);
-
   @override
   State<NoInternet> createState() => _NoInternetState();
 }

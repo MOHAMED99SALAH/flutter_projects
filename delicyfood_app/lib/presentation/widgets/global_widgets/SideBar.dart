@@ -1,6 +1,9 @@
-import 'package:delicyfood/presentation/screens/all_pages/LastOrder.dart';
+import 'package:delicyfood/presentation/screens/all_pages/Details_Order.dart';
 import 'package:delicyfood/presentation/screens/all_pages/home.dart';
 import 'package:delicyfood/presentation/screens/all_pages/login.dart';
+import '../../screens/all_pages/address.dart';
+import '../../screens/all_pages/lastOrders.dart';
+import '../cart/soldItems.dart';
 import 'NavigationModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'collapsList.dart';
 
 class Sidebar extends StatefulWidget {
-  const Sidebar({Key key}) : super(key: key);
-
   @override
   _SidebarState createState() => _SidebarState();
 }
@@ -21,7 +22,6 @@ class _SidebarState extends State<Sidebar> {
 
   _saveData(bool state) async {
     SharedPreferences shared_data = await SharedPreferences.getInstance();
-
     shared_data.setBool("STATE", state);
   }
 
@@ -54,7 +54,7 @@ class _SidebarState extends State<Sidebar> {
                     Callback: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return LastOrder();
+                        return Last_Orders();
                       }));
                     }),
                 CollapsList(
@@ -75,6 +75,8 @@ class _SidebarState extends State<Sidebar> {
                     Callback: () {
                       _auth.signOut();
                       _saveData(false);
+                      Listproducts_sold.itmes_sold?.clear();
+                      Address.address = "";
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return Login();

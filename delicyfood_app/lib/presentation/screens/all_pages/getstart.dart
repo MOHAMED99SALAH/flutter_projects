@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:delicyfood/presentation/screens/all_pages/hasNo_Internet.dart';
 import 'package:delicyfood/presentation/screens/all_pages/home.dart';
 import 'package:delicyfood/presentation/screens/all_pages/login.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_offline/flutter_offline.dart';
@@ -9,53 +10,70 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Getstart extends StatefulWidget {
-  static String Name = "";
-  static String name_user = "";
-  static String number = "";
-  static String password = "";
-  static bool state = false;
+  static String? Name = "";
+  static String? name_user = "";
+  static String? number = "";
+  static String? password = "";
+  static bool? state = false;
+  static String? User_id = "";
 
   @override
   _GetstartState createState() => _GetstartState();
 }
 
 class _GetstartState extends State<Getstart> {
+  void requestNotificatoin() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true);
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print("user agree ");
+    }
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage messaging) {
+      print('title' +
+          "${messaging.notification!.title}" +
+          'body' +
+          "${messaging.notification!.body}");
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    requestNotificatoin();
     _loadData();
   }
 
-  _saveData(String name, String username, String Pass, String number,
-      bool state) async {
-    SharedPreferences shared_data = await SharedPreferences.getInstance();
-    shared_data.setString("NAME", name);
-    shared_data.setString("USERNAME", username);
-    shared_data.setString("PASS", Pass);
-    shared_data.setString("NUMBER", number);
-    shared_data.setBool("STATE", state);
-  }
-
   _loadData() async {
-    SharedPreferences shared_data = await SharedPreferences.getInstance();
+    SharedPreferences? shared_data = await SharedPreferences.getInstance();
     setState(() {
       if (shared_data.getString("NAME") != "" ||
           shared_data.getString("NUMBER") != "" ||
           shared_data.getString("PASS") != "" ||
+          shared_data.getString("USERID") != "" ||
           shared_data.getBool("STATE") == false) {
         Getstart.Name = shared_data.getString("NAME");
         Getstart.name_user = shared_data.getString("USERNAME");
         Getstart.password = shared_data.getString("PASS");
         Getstart.number = shared_data.getString("NUMBER");
         Getstart.state = shared_data.getBool("STATE");
+        Getstart.User_id = shared_data.getString("USERID");
       } else {
         Getstart.Name = "";
         Getstart.name_user = "";
         Getstart.password = "";
         Getstart.number = "";
         Getstart.state = false;
+        Getstart.User_id = "";
       }
     });
   }
@@ -65,7 +83,11 @@ class _GetstartState extends State<Getstart> {
   Widget page() {
     return WillPopScope(
       onWillPop: () async {
-        SystemNavigator.pop();
+        bool value = true;
+        if (value == true) {
+          SystemNavigator.pop();
+        }
+        return value;
       },
       child: Scaffold(
         backgroundColor: Colors.teal[600],
@@ -121,7 +143,7 @@ class _GetstartState extends State<Getstart> {
                     ),
                     onPressed: () async {
                       try {
-                 //        _saveData("", "", "","", false);
+                        //        _saveData("", "", "","", false);
 
                         if (Getstart.state == false) {
                           Navigator.push(context,

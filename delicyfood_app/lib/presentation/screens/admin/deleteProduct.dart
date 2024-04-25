@@ -1,9 +1,10 @@
-import 'dart:ffi';
-
 import 'package:delicyfood/data/models/product.dart';
 import 'package:delicyfood/data/repository/repository.dart';
 import 'package:delicyfood/presentation/widgets/admin/deleteShape.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../../../data/data_source/Data_Api.dart';
 
 class DeleteProduct extends StatefulWidget {
   @override
@@ -11,9 +12,19 @@ class DeleteProduct extends StatefulWidget {
 }
 
 class _DeleteProductState extends State<DeleteProduct> {
-  int item_id;
+  int? item_id;
+  String? Id = "";
 
-  Products_repository repo;
+  Data_api? _data_api;
+  Products_repository? repo;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _data_api = new Data_api();
+    repo = new Products_repository(_data_api!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +35,16 @@ class _DeleteProductState extends State<DeleteProduct> {
             title: Text(
               "delete Product ",
               style: TextStyle(color: Colors.teal[700]),
+            ),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.teal[700],
+                size: 25,
+              ),
             ),
             backgroundColor: Colors.white,
             centerTitle: true),
@@ -68,20 +89,35 @@ class _DeleteProductState extends State<DeleteProduct> {
               ),
               SizedBox(
                 height: 150,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.all(2),
-                  itemCount: productListItem_fruits.list_categ.length,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      width: 2,
-                    );
-                  },
-                  itemBuilder: (context, index) {
-                    return DeleteShape(
-                        productListItem_vegetables.list_categ[index]);
-                  },
-                ),
+                child: FutureBuilder(
+                    future: repo!.getvege(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.data == null) {
+                        return Column(
+                          children: <Widget>[
+                            Center(
+                                child: LoadingAnimationWidget.inkDrop(
+                              color: Colors.teal[700]!,
+                              size: 45,
+                            ))
+                          ],
+                        );
+                      } else {
+                        return ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.all(2),
+                          itemCount: snapshot.data.length,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              width: 2,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            return DeleteShape(snapshot.data[index]);
+                          },
+                        );
+                      }
+                    }),
               ),
               SizedBox(
                 height: 20,
@@ -98,20 +134,35 @@ class _DeleteProductState extends State<DeleteProduct> {
               ),
               SizedBox(
                 height: 150,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.all(2),
-                  itemCount: productListItem_fruits.list_categ.length,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      width: 2,
-                    );
-                  },
-                  itemBuilder: (context, index) {
-                    return DeleteShape(
-                        productListItem_fruits.list_categ[index]);
-                  },
-                ),
+                child: FutureBuilder(
+                    future: repo!.getfruits(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.data == null) {
+                        return Column(
+                          children: <Widget>[
+                            Center(
+                                child: LoadingAnimationWidget.inkDrop(
+                              color: Colors.teal[700]!,
+                              size: 45,
+                            ))
+                          ],
+                        );
+                      } else {
+                        return ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.all(2),
+                          itemCount: snapshot.data.length,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              width: 2,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            return DeleteShape(snapshot.data[index]);
+                          },
+                        );
+                      }
+                    }),
               ),
               SizedBox(
                 height: 2,
@@ -125,7 +176,8 @@ class _DeleteProductState extends State<DeleteProduct> {
                 padding: EdgeInsets.only(left: 17, right: 17),
                 child: TextFormField(
                   onChanged: (value) {
-                    item_id = int.parse(value);
+                    Id = value;
+                    item_id = int.parse(value.toString());
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -159,58 +211,70 @@ class _DeleteProductState extends State<DeleteProduct> {
                       color: Colors.white),
                 ),
                 onPressed: () async {
-                  return showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text(
-                            "Warning",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                          content: Text("Are you sure to delete the item ?"),
-                          actions: [
-                            MaterialButton(
-                              child: Text(
-                                "Yes",
-                              ),
-                              onPressed: () async {
-                                Future<bool> status =
-                                    repo.deleteProduct(item_id);
-                                if (status == true) {
-                                  SnackBar snackBar = SnackBar(
-                                    content: Text("item deleted successfully",
-                                        style: TextStyle(color: Colors.white)),
-                                    backgroundColor: Colors.blueGrey,
-                                    duration: Duration(milliseconds: 400),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                } else {
-                                  SnackBar snackBar = SnackBar(
-                                    content: Text(
-                                      "some thing went wrong",
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    backgroundColor:
-                                        Color.fromARGB(255, 177, 44, 44),
-                                    duration: Duration(milliseconds: 400),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-                              },
+                  if (Id!.isEmpty) {
+                    SnackBar snackBar = SnackBar(
+                      content: Text("Please complete all Fields",
+                          style: TextStyle(color: Colors.black)),
+                      backgroundColor: Colors.red,
+                      duration: Duration(milliseconds: 2000),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  } else {
+                    return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Warning",
+                              style: TextStyle(color: Colors.red),
                             ),
-                            MaterialButton(
-                              child: Text(
-                                "No",
+                            content: Text("Are you sure to delete the item ?"),
+                            actions: [
+                              MaterialButton(
+                                child: Text(
+                                  "Yes",
+                                ),
+                                onPressed: () async {
+                                  bool status =
+                                      await repo!.deleteProduct(item_id!);
+                                  if (status == true) {
+                                    Navigator.of(context).pop();
+                                    SnackBar snackBar = SnackBar(
+                                      content: Text("item deleted successfully",
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      backgroundColor: Colors.blueGrey,
+                                      duration: Duration(milliseconds: 1200),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  } else {
+                                    SnackBar snackBar = SnackBar(
+                                      content: Text(
+                                        "some thing went wrong",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 177, 44, 44),
+                                      duration: Duration(milliseconds: 1200),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
                               ),
-                              onPressed: () async {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      });
+                              MaterialButton(
+                                child: Text(
+                                  "No",
+                                ),
+                                onPressed: () async {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                  }
                 },
               ),
             ],

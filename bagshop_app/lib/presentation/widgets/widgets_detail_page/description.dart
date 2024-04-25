@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import '../../../data/models/model.dart';
 
 class Description extends StatelessWidget {
-  const Description({
-    Key key,
+  const Description(
     this.product,
-  }) : super(key: key);
+  );
 
   final Product product;
 

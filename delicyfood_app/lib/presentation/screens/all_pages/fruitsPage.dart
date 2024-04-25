@@ -5,6 +5,10 @@ import 'package:delicyfood/presentation/widgets/vegetables_and_fruits/search.dar
 import 'package:delicyfood/presentation/widgets/vegetables_and_fruits/shapeItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../../../data/data_source/Data_Api.dart';
+import '../../../data/repository/repository.dart';
 
 class Fruits extends StatefulWidget {
   @override
@@ -12,6 +16,16 @@ class Fruits extends StatefulWidget {
 }
 
 class _FruitsState extends State<Fruits> {
+  Data_api? _data_api;
+  Products_repository? repo;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _data_api = new Data_api();
+    repo = new Products_repository(_data_api!);
+  }
+
   Widget page() {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -35,8 +49,7 @@ class _FruitsState extends State<Fruits> {
               onPressed: () {
                 showSearch(
                     context: context,
-                    delegate:
-                        DataSearch(data: productListItem_fruits.list_categ));
+                    delegate: DataSearch(productListItem_fruits.list_categ));
               },
               icon: Icon(
                 Icons.search,
@@ -58,8 +71,33 @@ class _FruitsState extends State<Fruits> {
               SizedBox(
                 height: 20,
               ),
-              for (var product in productListItem_fruits.list_categ)
-                Shape(product)
+              FutureBuilder(
+                  future: repo!.getfruits(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == null) {
+                      return Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 200,
+                          ),
+                          Center(
+                              child: LoadingAnimationWidget.inkDrop(
+                            color: Colors.teal[700]!,
+                            size: 45,
+                          ))
+                        ],
+                      );
+                    } else {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, index) {
+                            return Shape(snapshot.data[index]);
+                          });
+                    }
+                  }),
             ],
           ),
         ),

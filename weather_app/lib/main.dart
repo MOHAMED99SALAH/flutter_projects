@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather/presentation/screens/search.dart';
 
@@ -10,7 +11,9 @@ class weather extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, screenType) {
-      return MaterialApp(debugShowCheckedModeBanner: false, home: Searchpage());
+      return OverlaySupport.global(
+          child: MaterialApp(
+              debugShowCheckedModeBanner: false, home: Searchpage()));
     });
   }
 }
