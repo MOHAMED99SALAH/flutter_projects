@@ -38,9 +38,7 @@ class _driver_RegisterState extends State<driver_Register> {
       onWillPop: () async {
         bool value = true;
         if (value == true) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Orders();
-          }));
+          Navigator.pop(context);
         }
         return value;
       },
@@ -56,7 +54,7 @@ class _driver_RegisterState extends State<driver_Register> {
               Column(
                 children: <Widget>[
                   Text(
-                    "Sign Up as driver ",
+                    "Sign Up an driver ",
                     style: TextStyle(
                         fontSize: 30,
                         color: Colors.teal,

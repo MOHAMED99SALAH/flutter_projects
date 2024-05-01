@@ -7,7 +7,7 @@ import 'package:delicyfood/data/data_source/Data_Api.dart';
 import 'package:delicyfood/data/models/Order.dart';
 import 'package:delicyfood/data/repository/repository.dart';
 import '../../widgets/lastOrders/shapeOForder.dart';
-import '../../widgets/shop/order_Shape.dart';
+import '../../widgets/market/order_Shape.dart';
 import '../driver/drive_register.dart';
 
 class Orders extends StatefulWidget {
@@ -57,27 +57,6 @@ class OrdersState extends State<Orders> {
                   size: 25,
                 ));
           }),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return driver_Register();
-                }));
-              },
-              child: Container(
-                color: Colors.white,
-                height: 50,
-                width: 60,
-                child: Text(
-                  "Register a driver",
-                  style: TextStyle(
-                      color: Colors.teal,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15),
-                ),
-              ),
-            )
-          ],
           backgroundColor: Colors.white,
           centerTitle: true,
         ),

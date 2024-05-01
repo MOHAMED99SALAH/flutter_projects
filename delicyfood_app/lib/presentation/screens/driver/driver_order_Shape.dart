@@ -31,7 +31,7 @@ class _driver_Order_shapeState extends State<driver_Order_shape> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: widget._order.status_of_market ? Colors.white : Colors.red,
+            color: Colors.white,
           ),
           height: 90,
           width: ReallyWidth,

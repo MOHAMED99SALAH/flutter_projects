@@ -32,7 +32,7 @@ class _Last_OrdersState extends State<Last_Orders> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
             title: Text(
-              "Orders ",
+              "Last Orders ",
               style: TextStyle(color: Colors.teal[700]),
             ),
             leading: IconButton(

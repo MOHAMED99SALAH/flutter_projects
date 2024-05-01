@@ -21,6 +21,7 @@ class ButtomExcute extends StatefulWidget {
 }
 
 class _ButtomExcuteState extends State<ButtomExcute> {
+  bool _isButtonDisabled = false;
   Data_api? _data_api;
   Products_repository? repo;
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -36,6 +37,16 @@ class _ButtomExcuteState extends State<ButtomExcute> {
         phone = value.docs[0]['Phone'];
       });
     });
+  }
+
+  void handleButtton() {
+    if (!_isButtonDisabled) {
+      setState(() {
+        _isButtonDisabled = true;
+      });
+    } else {
+      _isButtonDisabled = false;
+    }
   }
 
   @override
@@ -88,41 +99,11 @@ class _ButtomExcuteState extends State<ButtomExcute> {
                                 "Yes",
                               ),
                               onPressed: () async {
-                                print(phone!);
-                                if (phone == "") {
-                                  Navigator.of(context).pop();
-                                  SnackBar snackBar = SnackBar(
-                                    content: Text(
-                                      "some thing went wrong",
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    backgroundColor:
-                                        Color.fromARGB(255, 177, 44, 44),
-                                    duration: Duration(milliseconds: 2500),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                } else {
-                                  bool status = await repo!.addOrder(
-                                      widget.soldProducts,
-                                      cost.num.toInt(),
-                                      Address?.address!,
-                                      phone!);
-                                  if (status == true) {
+                                if (_isButtonDisabled == false) {
+                                  handleButtton();
+                                  if (phone == "") {
+                                    print(phone);
                                     Navigator.of(context).pop();
-                                    SnackBar snackBar = SnackBar(
-                                      content: Text(
-                                        "Your order will arrive in 15 minutes " +
-                                            "  TO " +
-                                            Getstart.name_user!,
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      duration: Duration(milliseconds: 3000),
-                                      backgroundColor: Colors.blueGrey,
-                                    );
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                  } else {
                                     SnackBar snackBar = SnackBar(
                                       content: Text(
                                         "some thing went wrong",
@@ -134,6 +115,38 @@ class _ButtomExcuteState extends State<ButtomExcute> {
                                     );
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBar);
+                                  } else {
+                                    bool status = await repo!.addOrder(
+                                        widget.soldProducts,
+                                        cost.num.toInt(),
+                                        Address?.address!,
+                                        phone!);
+                                    if (status == true) {
+                                      Navigator.of(context).pop();
+                                      SnackBar snackBar = SnackBar(
+                                        content: Text(
+                                          "Your order will arrive in 15 minutes ",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        duration: Duration(milliseconds: 3000),
+                                        backgroundColor: Colors.blueGrey,
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                      handleButtton();
+                                    } else {
+                                      SnackBar snackBar = SnackBar(
+                                        content: Text(
+                                          "some thing went wrong",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        backgroundColor:
+                                            Color.fromARGB(255, 177, 44, 44),
+                                        duration: Duration(milliseconds: 2500),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
                                   }
                                 }
                               },

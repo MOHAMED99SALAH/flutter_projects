@@ -225,17 +225,7 @@ class _SecondHaveState extends State<SecondHave> {
                             },
                           ),
                         );
-                      } else if (check == "error") {
-                        SnackBar snackBar = SnackBar(
-                          content: Text(
-                            "some thing went wrong",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          backgroundColor: Color.fromARGB(255, 177, 44, 44),
-                          duration: Duration(milliseconds: 1200),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      } else if (_emaill == "midoosalah2000@gmail.com" &&
+                      }  else if (_emaill == "market@gmail.com" &&
                           _passw == "999999") {
                         Navigator.push(
                           context,

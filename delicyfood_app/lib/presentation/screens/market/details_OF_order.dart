@@ -3,7 +3,7 @@ import 'package:delicyfood/data/models/soldProduct.dart';
 import 'package:delicyfood/data/repository/repository.dart';
 import 'package:delicyfood/presentation/screens/all_pages/getstart.dart';
 import 'package:delicyfood/presentation/widgets/lastOrders/LastOrderShape.dart';
-import 'package:delicyfood/presentation/widgets/shop/order_Shape.dart';
+import 'package:delicyfood/presentation/widgets/market/order_Shape.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../data/models/order_details.dart';

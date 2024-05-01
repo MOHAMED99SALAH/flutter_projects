@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../admin/adminPage.dart';
+import '../driver/drive_register.dart';
 import '../market/orders.dart';
 
 class marketPage extends StatefulWidget {
@@ -50,7 +51,7 @@ class _marketPageState extends State<marketPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
                 child: Text(
-                  "admin page ",
+                  "Admin page ",
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -65,6 +66,27 @@ class _marketPageState extends State<marketPage> {
                       },
                     ),
                   );
+                }),
+            SizedBox(
+              height: 50,
+            ),
+            MaterialButton(
+                minWidth: MediaQuery.of(context).size.width / 2,
+                height: 50,
+                color: Colors.teal,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                child: Text(
+                  "Register an driver",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return driver_Register();
+                  }));
                 }),
             SizedBox(
               height: 50,
