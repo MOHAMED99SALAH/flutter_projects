@@ -91,7 +91,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           child: ListView(
             children: <Widget>[
               SizedBox(height: 12),
-              image("images/advertise.png"),
+              image("images/head.png"),
               SizedBox(height: 30),
               Padding(
                 padding: EdgeInsets.only(left: 19, right: 8),
@@ -114,11 +114,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Categorey(
-                                  "images/vegetables_home.png", "vegetables"),
+                                  "images/vege.png", "vegetables"),
                               SizedBox(
                                 width: 15,
                               ),
-                              Categorey("images/fruits_home.png", "Fruits"),
+                              Categorey("images/fruits.png", "Fruits"),
                               SizedBox(
                                 width: 50,
                               ),

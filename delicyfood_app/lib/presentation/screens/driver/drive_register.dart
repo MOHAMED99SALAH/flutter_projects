@@ -54,7 +54,7 @@ class _driver_RegisterState extends State<driver_Register> {
               Column(
                 children: <Widget>[
                   Text(
-                    "Sign Up an driver ",
+                    "Sign Up a driver ",
                     style: TextStyle(
                         fontSize: 30,
                         color: Colors.teal,

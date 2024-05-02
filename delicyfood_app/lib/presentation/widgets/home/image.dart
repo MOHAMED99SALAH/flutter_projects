@@ -19,7 +19,7 @@ class _imageState extends State<image> {
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: AssetImage(widget.imgPath),
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             )),
         height: 190,
         width: MediaQuery.of(context).size.width - 10,

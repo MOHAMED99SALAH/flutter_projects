@@ -44,7 +44,7 @@ class _CategoreyState extends State<Categorey> {
           decoration: BoxDecoration(
               image: DecorationImage(
             image: AssetImage(widget.image),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           )),
         ),
       ),
